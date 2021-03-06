@@ -17,6 +17,7 @@ public class FirstForm extends javax.swing.JFrame {
     /**
      * Creates new form FirstForm
      */
+    DBSearch db = new DBSearch();
     public FirstForm() {
         initComponents();
     }
@@ -126,54 +127,27 @@ public class FirstForm extends javax.swing.JFrame {
         String lName = customerLastName.getText();
         String ID = customerID.getText();
         
-        
-        dbSetup my = new dbSetup();
-        //Building the connection
-        Connection conn = null;
+        ResultSet result = db.query("SELECT * FROM public.\"Customers\" WHERE \"CustomerID\" = " + ID);
+        String dbfName = "";
+        String dblName = "";
+        String dbID = "";
         try {
-            Class.forName("org.postgresql.Driver");
-            conn = DriverManager.getConnection("jdbc:postgresql://csce-315-db.engr.tamu.edu/db901_group7_project2",
-            my.user, my.pswd);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getClass().getName()+": "+e.getMessage());
-            System.exit(0);
-        }//end try catch
-        try{
-        //create a statement object
-            Statement stmt = conn.createStatement();
-            //create an SQL statement
-            try{
-                String sqlStatement = "SELECT * FROM public.\"Customers\" WHERE \"CustomerID\" = " + ID;
-                //send statement to DBMS
-                ResultSet result = stmt.executeQuery(sqlStatement);
-                result.next();
-                String dbfName = result.getString("FirstName");
-                String dblName = result.getString("LastName");
-                String dbID = result.getString("CustomerID");
-                
-                if(fName.toLowerCase().equals(dbfName.toLowerCase()) && lName.toLowerCase().equals(dblName.toLowerCase())
-                        && ID.equals(dbID)){
-                    dispose();
-                    NewJFrame f = new NewJFrame();
-                    f.setVisible(true);
-                } else{
-                    JOptionPane.showMessageDialog(null, "Incorrect Data");
-                }                
-            } catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Invalid Login");
-            }
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null,"Error accessing Database.");
+            result.next();
+            dbfName = result.getString("FirstName");
+            dblName = result.getString("LastName");
+            dbID = result.getString("CustomerID");
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Invalid");
         }
-        //JOptionPane.showMessageDialog(null,cus_lname);
-        //closing the connection
-        try {
-            conn.close();
-            //JOptionPane.showMessageDialog(null,"Connection Closed.");
-        } catch(Exception e) {
-            JOptionPane.showMessageDialog(null,"Connection NOT Closed.");
-        }
+
+        if(fName.toLowerCase().equals(dbfName.toLowerCase()) && lName.toLowerCase().equals(dblName.toLowerCase())
+                && ID.equals(dbID)){
+            dispose();
+            NewJFrame f = new NewJFrame();
+            f.setVisible(true);
+        } else{
+            JOptionPane.showMessageDialog(null, "Incorrect Data");
+        }                
     }//GEN-LAST:event_loginActionPerformed
 
     private void customerFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerFirstNameActionPerformed

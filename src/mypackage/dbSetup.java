@@ -12,4 +12,7 @@ package mypackage;
 public class dbSetup {
     public static final String user = "brandonpham29";
     public static final String pswd = "327000915";
+    
+    public String getUser() { return user; }
+    public String getPswd() { return pswd; }
 }

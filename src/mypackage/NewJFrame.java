@@ -17,42 +17,14 @@ public class NewJFrame extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    
-    DefaultListModel dm = new DefaultListModel();
-    DefaultListModel TotalOrder = new DefaultListModel();
-    
+    DBSearch db = new DBSearch();
+    DefaultListModel dm = new DefaultListModel(); //Krab patt, krustyb pizza
+    DefaultListModel TotalOrder = new DefaultListModel(); //E1. E2
+    DefaultListModel ItemList = new DefaultListModel();
     public void addToList(String name){
         dm.addElement(name);
-        CartList.setModel(dm);
         
-//        try{
-//        //create a statement object
-//            Statement stmt = conn.createStatement();
-//            //create an SQL statement
-//            try{
-//                String sqlStatement = "SELECT * FROM public.\"Customers\" WHERE \"CustomerID\" = " + ID;
-//                //send statement to DBMS
-//                ResultSet result = stmt.executeQuery(sqlStatement);
-//                result.next();
-//                String dbfName = result.getString("FirstName");
-//                String dblName = result.getString("LastName");
-//                String dbID = result.getString("CustomerID");
-//                
-//                if(fName.toLowerCase().equals(dbfName.toLowerCase()) && lName.toLowerCase().equals(dblName.toLowerCase())
-//                        && ID.equals(dbID)){
-//                    dispose();
-//                    NewJFrame f = new NewJFrame();
-//                    f.setVisible(true);
-//                } else{
-//                    JOptionPane.showMessageDialog(null, "Incorrect Data");
-//                }                
-//            } catch(Exception e){
-//                JOptionPane.showMessageDialog(null, "Invalid Login");
-//            }
-//        } catch (Exception e){
-//            JOptionPane.showMessageDialog(null,"Error accessing Database.");
-//        }
-        //TotalOrder.add(ID);
+        CartList.setModel(dm);
     }
     public NewJFrame() {
         initComponents();
@@ -67,29 +39,37 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
         jButton1 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        KPcombo = new javax.swing.JButton();
-        PizzaCombo = new javax.swing.JButton();
-        DKPcombo = new javax.swing.JButton();
-        DognChips = new javax.swing.JButton();
-        TKPcombo = new javax.swing.JButton();
-        SupremeKombo = new javax.swing.JButton();
-        SailorsSuprise = new javax.swing.JButton();
-        CaptainSpecial = new javax.swing.JButton();
-        JPCombo = new javax.swing.JButton();
-        PipMeal = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        Combo1BTN = new javax.swing.JButton();
+        Combo4BTN = new javax.swing.JButton();
+        Combo2BTN = new javax.swing.JButton();
+        Combo5BTN = new javax.swing.JButton();
+        Combo3BTN = new javax.swing.JButton();
+        Combo6BTN = new javax.swing.JButton();
+        Combo7BTN = new javax.swing.JButton();
+        Combo8BTN = new javax.swing.JButton();
+        ComboListBTN = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         CartList = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         ClearCart = new javax.swing.JButton();
         SubmitOrder = new javax.swing.JButton();
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenuItem2.setText("jMenuItem2");
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,132 +79,6 @@ public class NewJFrame extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        KPcombo.setText("Krabby Patty Combo");
-        KPcombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                KPcomboActionPerformed(evt);
-            }
-        });
-
-        PizzaCombo.setText("Krusty Krab Pizza");
-        PizzaCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PizzaComboActionPerformed(evt);
-            }
-        });
-
-        DKPcombo.setText("Double Krabby Patty Combo");
-        DKPcombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DKPcomboActionPerformed(evt);
-            }
-        });
-
-        DognChips.setText("Salty Sea Dog n' Chips");
-        DognChips.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DognChipsActionPerformed(evt);
-            }
-        });
-
-        TKPcombo.setText("Triple Krabby Patty Combo");
-        TKPcombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TKPcomboActionPerformed(evt);
-            }
-        });
-
-        SupremeKombo.setText("Supreme Krusty Kombo");
-        SupremeKombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SupremeKomboActionPerformed(evt);
-            }
-        });
-
-        SailorsSuprise.setText("Sailors' Suprise");
-        SailorsSuprise.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SailorsSupriseActionPerformed(evt);
-            }
-        });
-
-        CaptainSpecial.setText("Captain's Special");
-        CaptainSpecial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CaptainSpecialActionPerformed(evt);
-            }
-        });
-
-        JPCombo.setText("Jelly Patty Combo");
-        JPCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JPComboActionPerformed(evt);
-            }
-        });
-
-        PipMeal.setText("Pipsqueak Meal");
-        PipMeal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PipMealActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(DognChips)
-                        .addGap(52, 52, 52)
-                        .addComponent(SupremeKombo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(KPcombo)
-                        .addGap(29, 29, 29)
-                        .addComponent(DKPcombo)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TKPcombo, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(SailorsSuprise, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(65, 65, 65)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PizzaCombo)
-                    .addComponent(CaptainSpecial))
-                .addGap(24, 24, 24))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addComponent(JPCombo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PipMeal)
-                .addGap(176, 176, 176))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(141, 141, 141)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PizzaCombo)
-                    .addComponent(KPcombo)
-                    .addComponent(DKPcombo)
-                    .addComponent(TKPcombo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DognChips)
-                    .addComponent(SupremeKombo)
-                    .addComponent(SailorsSuprise)
-                    .addComponent(CaptainSpecial))
-                .addGap(115, 115, 115)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JPCombo)
-                    .addComponent(PipMeal))
-                .addGap(44, 44, 44))
-        );
-
-        jTabbedPane1.addTab("Combos", jPanel1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -277,6 +131,121 @@ public class NewJFrame extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Desserts", jPanel5);
+
+        Combo1BTN.setText("Combo1");
+        Combo1BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo1BTNActionPerformed(evt);
+            }
+        });
+
+        Combo4BTN.setText("Combo4");
+        Combo4BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo4BTNActionPerformed(evt);
+            }
+        });
+
+        Combo2BTN.setText("Combo2");
+        Combo2BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo2BTNActionPerformed(evt);
+            }
+        });
+
+        Combo5BTN.setText("Combo5");
+        Combo5BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo5BTNActionPerformed(evt);
+            }
+        });
+
+        Combo3BTN.setText("Combo3");
+        Combo3BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo3BTNActionPerformed(evt);
+            }
+        });
+
+        Combo6BTN.setText("Combo6");
+        Combo6BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo6BTNActionPerformed(evt);
+            }
+        });
+
+        Combo7BTN.setText("Combo7");
+        Combo7BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo7BTNActionPerformed(evt);
+            }
+        });
+
+        Combo8BTN.setText("Combo8");
+        Combo8BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo8BTNActionPerformed(evt);
+            }
+        });
+
+        ComboListBTN.setText("Combos");
+        ComboListBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboListBTNActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(ComboListBTN)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Combo5BTN, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(Combo1BTN)
+                                .addGap(109, 109, 109)))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Combo6BTN)
+                            .addComponent(Combo2BTN))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Combo3BTN)
+                            .addComponent(Combo7BTN))
+                        .addGap(105, 105, 105)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Combo8BTN)
+                            .addComponent(Combo4BTN))
+                        .addGap(64, 64, 64))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ComboListBTN)
+                .addGap(107, 107, 107)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Combo4BTN)
+                    .addComponent(Combo1BTN)
+                    .addComponent(Combo2BTN)
+                    .addComponent(Combo3BTN))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Combo5BTN)
+                    .addComponent(Combo6BTN)
+                    .addComponent(Combo7BTN)
+                    .addComponent(Combo8BTN))
+                .addGap(182, 182, 182))
+        );
+
+        jTabbedPane1.addTab("Combos", jPanel1);
 
         jScrollPane1.setViewportView(CartList);
 
@@ -343,9 +312,10 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(SubmitOrder))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -358,57 +328,6 @@ public class NewJFrame extends javax.swing.JFrame {
         f.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void KPcomboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KPcomboActionPerformed
-        // TODO add your handling code here:
-        addToList(KPcombo.getText());
-        
-    }//GEN-LAST:event_KPcomboActionPerformed
-
-    private void PizzaComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PizzaComboActionPerformed
-        // TODO add your handling code here:
-        addToList(PizzaCombo.getText());
-    }//GEN-LAST:event_PizzaComboActionPerformed
-
-    private void DKPcomboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DKPcomboActionPerformed
-        // TODO add your handling code here:
-        addToList(DKPcombo.getText());
-    }//GEN-LAST:event_DKPcomboActionPerformed
-
-    private void DognChipsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DognChipsActionPerformed
-        // TODO add your handling code here:
-        addToList(DognChips.getText());
-    }//GEN-LAST:event_DognChipsActionPerformed
-
-    private void TKPcomboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TKPcomboActionPerformed
-        // TODO add your handling code here:
-        addToList(TKPcombo.getText());
-    }//GEN-LAST:event_TKPcomboActionPerformed
-
-    private void SupremeKomboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SupremeKomboActionPerformed
-        // TODO add your handling code here:
-        addToList(SupremeKombo.getText());
-    }//GEN-LAST:event_SupremeKomboActionPerformed
-
-    private void SailorsSupriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SailorsSupriseActionPerformed
-        // TODO add your handling code here:
-        addToList(SailorsSuprise.getText());
-    }//GEN-LAST:event_SailorsSupriseActionPerformed
-
-    private void CaptainSpecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaptainSpecialActionPerformed
-        // TODO add your handling code here:
-        addToList(CaptainSpecial.getText());
-    }//GEN-LAST:event_CaptainSpecialActionPerformed
-
-    private void JPComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JPComboActionPerformed
-        // TODO add your handling code here:
-        addToList(JPCombo.getText());
-    }//GEN-LAST:event_JPComboActionPerformed
-
-    private void PipMealActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PipMealActionPerformed
-        // TODO add your handling code here:
-        addToList(PipMeal.getText());
-    }//GEN-LAST:event_PipMealActionPerformed
-
     private void ClearCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearCartActionPerformed
         // TODO add your handling code here:
         dm.clear();
@@ -418,6 +337,65 @@ public class NewJFrame extends javax.swing.JFrame {
     private void SubmitOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitOrderActionPerformed
         
     }//GEN-LAST:event_SubmitOrderActionPerformed
+
+    private void Combo8BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo8BTNActionPerformed
+        // TODO add your handling code here:
+        addToList(Combo8BTN.getText());
+    }//GEN-LAST:event_Combo8BTNActionPerformed
+
+    private void Combo7BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo7BTNActionPerformed
+        // TODO add your handling code here:
+        addToList(Combo7BTN.getText());
+    }//GEN-LAST:event_Combo7BTNActionPerformed
+
+    private void Combo6BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo6BTNActionPerformed
+        // TODO add your handling code here:
+        addToList(Combo6BTN.getText());
+    }//GEN-LAST:event_Combo6BTNActionPerformed
+
+    private void Combo3BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo3BTNActionPerformed
+        // TODO add your handling code here:
+        addToList(Combo3BTN.getText());
+    }//GEN-LAST:event_Combo3BTNActionPerformed
+
+    private void Combo5BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo5BTNActionPerformed
+        // TODO add your handling code here:
+        addToList(Combo5BTN.getText());
+    }//GEN-LAST:event_Combo5BTNActionPerformed
+
+    private void Combo2BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo2BTNActionPerformed
+        // TODO add your handling code here:
+        addToList(Combo2BTN.getText());
+    }//GEN-LAST:event_Combo2BTNActionPerformed
+
+    private void Combo4BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo4BTNActionPerformed
+        // TODO add your handling code here:
+        addToList(Combo4BTN.getText());
+    }//GEN-LAST:event_Combo4BTNActionPerformed
+
+    private void Combo1BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo1BTNActionPerformed
+        // TODO add your handling code here:
+        addToList(Combo1BTN.getText());
+    }//GEN-LAST:event_Combo1BTNActionPerformed
+
+    private void ComboListBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboListBTNActionPerformed
+        // TODO add your handling code here:
+        ResultSet result = db.query("SELECT * FROM public.\"Combos\"");
+        ItemList.clear();
+        try {
+            while(result.next()){
+                ItemList.addElement(result.getString("Name"));
+            }
+            //CartList.setModel(ItemList);
+            for(int i = 0; i < 7; i++){
+                String num = Integer.toString(i+1);
+                String comboName = "Combo" + num + "BTN";
+                //comboName.setText(ItemList[i]);
+            }
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Query Error");
+        }
+    }//GEN-LAST:event_ComboListBTNActionPerformed
 
     
     
@@ -461,21 +439,23 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CaptainSpecial;
     private javax.swing.JList<String> CartList;
     private javax.swing.JButton ClearCart;
-    private javax.swing.JButton DKPcombo;
-    private javax.swing.JButton DognChips;
-    private javax.swing.JButton JPCombo;
-    private javax.swing.JButton KPcombo;
-    private javax.swing.JButton PipMeal;
-    private javax.swing.JButton PizzaCombo;
-    private javax.swing.JButton SailorsSuprise;
+    private javax.swing.JButton Combo1BTN;
+    private javax.swing.JButton Combo2BTN;
+    private javax.swing.JButton Combo3BTN;
+    private javax.swing.JButton Combo4BTN;
+    private javax.swing.JButton Combo5BTN;
+    private javax.swing.JButton Combo6BTN;
+    private javax.swing.JButton Combo7BTN;
+    private javax.swing.JButton Combo8BTN;
+    private javax.swing.JButton ComboListBTN;
     private javax.swing.JButton SubmitOrder;
-    private javax.swing.JButton SupremeKombo;
-    private javax.swing.JButton TKPcombo;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
