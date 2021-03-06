@@ -161,7 +161,7 @@ public class FirstForm extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Incorrect Data");
                 }                
             } catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Error Getting Customer");
+                JOptionPane.showMessageDialog(null, "Invalid Login");
             }
         } catch (Exception e){
             JOptionPane.showMessageDialog(null,"Error accessing Database.");
