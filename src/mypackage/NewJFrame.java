@@ -534,8 +534,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_EntreeListBTNActionPerformed
 
-    private void ComboListBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboListBTNActionPerformed
-        // TODO add your handling code here:
+    private void ComboListBTNActionPerformed_helper() {
         ResultSet result = db.query("SELECT * FROM public.\"Combos\"");
         ItemList.clear();
         PriceList.clear();
@@ -549,6 +548,10 @@ public class NewJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Query Error");
         }
         formatButtons();
+    }
+    
+    private void ComboListBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboListBTNActionPerformed
+        ComboListBTNActionPerformed_helper();
     }//GEN-LAST:event_ComboListBTNActionPerformed
 
     private void Menu8BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu8BTNActionPerformed
@@ -621,7 +624,8 @@ public class NewJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewJFrame().setVisible(true);
+                NewJFrame a = new NewJFrame();
+                a.setVisible(true);
             }
         });
     }
