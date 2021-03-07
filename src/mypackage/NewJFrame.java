@@ -386,12 +386,6 @@ public class NewJFrame extends javax.swing.JFrame {
             while(result.next()){
                 ItemList.addElement(result.getString("Name"));
             }
-            //CartList.setModel(ItemList);
-            for(int i = 0; i < 7; i++){
-                String num = Integer.toString(i+1);
-                String comboName = "Combo" + num + "BTN";
-                //comboName.setText(ItemList[i]);
-            }
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Query Error");
         }
