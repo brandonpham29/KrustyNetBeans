@@ -126,8 +126,12 @@ public class FirstForm extends javax.swing.JFrame {
         String fName = customerFirstName.getText();
         String lName = customerLastName.getText();
         String ID = customerID.getText();
-        
-        ResultSet result = db.query("SELECT * FROM public.\"Customers\" WHERE \"CustomerID\" = " + ID);
+        ResultSet result;
+        if(Integer.parseInt(ID) > 0){
+            result = db.query("SELECT * FROM public.\"Customers\" WHERE \"CustomerID\" = " + ID);
+        } else{
+            result = db.query("SELECT * FROM public.\"Managers\" WHERE \"ID\" = " + ID);
+        }
         String dbfName = "";
         String dblName = "";
         String dbID = "";
@@ -135,16 +139,23 @@ public class FirstForm extends javax.swing.JFrame {
             result.next();
             dbfName = result.getString("FirstName");
             dblName = result.getString("LastName");
-            dbID = result.getString("CustomerID");
+            if(Integer.parseInt(ID) > 0) dbID = result.getString("CustomerID");
+            else dbID = result.getString("ID");
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Invalid");
         }
-
+            
         if(fName.toLowerCase().equals(dbfName.toLowerCase()) && lName.toLowerCase().equals(dblName.toLowerCase())
-                && ID.equals(dbID)){
-            dispose();
-            NewJFrame f = new NewJFrame();
-            f.setVisible(true);
+                && Integer.parseInt(ID) == Integer.parseInt(dbID)){
+            if(Integer.parseInt(ID) > 0){
+                dispose();
+                NewJFrame f = new NewJFrame();
+                f.setVisible(true);
+            } else{
+                dispose();
+                OrderHistory f = new OrderHistory();
+                f.setVisible(true);
+            }
         } else{
             JOptionPane.showMessageDialog(null, "Incorrect Data");
         }                
