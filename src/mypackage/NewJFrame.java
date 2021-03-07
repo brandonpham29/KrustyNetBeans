@@ -18,9 +18,11 @@ public class NewJFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     DBSearch db = new DBSearch();
-    DefaultListModel dm = new DefaultListModel(); //Krab patt, krustyb pizza
+    DefaultListModel dm = new DefaultListModel(); //Krabby patty, krusty pizza
     DefaultListModel TotalOrder = new DefaultListModel(); //E1. E2
-    DefaultListModel ItemList = new DefaultListModel();
+    DefaultListModel<String> ItemList = new DefaultListModel();
+    int currentFirstItem = 0;
+    
     public void addToList(String name){
         dm.addElement(name);
         
@@ -42,22 +44,24 @@ public class NewJFrame extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jButton1 = new javax.swing.JButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        BackBTN = new javax.swing.JButton();
+        MenuTab = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        Combo1BTN = new javax.swing.JButton();
-        Combo4BTN = new javax.swing.JButton();
-        Combo2BTN = new javax.swing.JButton();
-        Combo5BTN = new javax.swing.JButton();
-        Combo3BTN = new javax.swing.JButton();
-        Combo6BTN = new javax.swing.JButton();
-        Combo7BTN = new javax.swing.JButton();
-        Combo8BTN = new javax.swing.JButton();
+        Menu1BTN = new javax.swing.JButton();
+        Menu4BTN = new javax.swing.JButton();
+        Menu2BTN = new javax.swing.JButton();
+        Menu5BTN = new javax.swing.JButton();
+        Menu3BTN = new javax.swing.JButton();
+        Menu6BTN = new javax.swing.JButton();
+        Menu7BTN = new javax.swing.JButton();
+        Menu8BTN = new javax.swing.JButton();
         ComboListBTN = new javax.swing.JButton();
+        EntreeListBTN = new javax.swing.JButton();
+        SidesListBTN = new javax.swing.JButton();
+        DrinkListBTN = new javax.swing.JButton();
+        DessertListBTN = new javax.swing.JButton();
+        NextPageBTN = new javax.swing.JButton();
+        PrevPageBTN = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         CartList = new javax.swing.JList<>();
@@ -73,118 +77,66 @@ public class NewJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BackBTN.setText("Login");
+        BackBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BackBTNActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Entrees", jPanel2);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Sides", jPanel3);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Drinks", jPanel4);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Desserts", jPanel5);
-
-        Combo1BTN.setText("Combo1");
-        Combo1BTN.addActionListener(new java.awt.event.ActionListener() {
+        Menu1BTN.setText("1");
+        Menu1BTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Combo1BTNActionPerformed(evt);
+                Menu1BTNActionPerformed(evt);
             }
         });
 
-        Combo4BTN.setText("Combo4");
-        Combo4BTN.addActionListener(new java.awt.event.ActionListener() {
+        Menu4BTN.setText("4");
+        Menu4BTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Combo4BTNActionPerformed(evt);
+                Menu4BTNActionPerformed(evt);
             }
         });
 
-        Combo2BTN.setText("Combo2");
-        Combo2BTN.addActionListener(new java.awt.event.ActionListener() {
+        Menu2BTN.setText("2");
+        Menu2BTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Combo2BTNActionPerformed(evt);
+                Menu2BTNActionPerformed(evt);
             }
         });
 
-        Combo5BTN.setText("Combo5");
-        Combo5BTN.addActionListener(new java.awt.event.ActionListener() {
+        Menu5BTN.setText("5");
+        Menu5BTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Combo5BTNActionPerformed(evt);
+                Menu5BTNActionPerformed(evt);
             }
         });
 
-        Combo3BTN.setText("Combo3");
-        Combo3BTN.addActionListener(new java.awt.event.ActionListener() {
+        Menu3BTN.setText("3");
+        Menu3BTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Combo3BTNActionPerformed(evt);
+                Menu3BTNActionPerformed(evt);
             }
         });
 
-        Combo6BTN.setText("Combo6");
-        Combo6BTN.addActionListener(new java.awt.event.ActionListener() {
+        Menu6BTN.setText("6");
+        Menu6BTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Combo6BTNActionPerformed(evt);
+                Menu6BTNActionPerformed(evt);
             }
         });
 
-        Combo7BTN.setText("Combo7");
-        Combo7BTN.addActionListener(new java.awt.event.ActionListener() {
+        Menu7BTN.setText("7");
+        Menu7BTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Combo7BTNActionPerformed(evt);
+                Menu7BTNActionPerformed(evt);
             }
         });
 
-        Combo8BTN.setText("Combo8");
-        Combo8BTN.addActionListener(new java.awt.event.ActionListener() {
+        Menu8BTN.setText("8");
+        Menu8BTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Combo8BTNActionPerformed(evt);
+                Menu8BTNActionPerformed(evt);
             }
         });
 
@@ -195,57 +147,122 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        EntreeListBTN.setText("Entrees");
+        EntreeListBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EntreeListBTNActionPerformed(evt);
+            }
+        });
+
+        SidesListBTN.setText("Sides");
+        SidesListBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SidesListBTNActionPerformed(evt);
+            }
+        });
+
+        DrinkListBTN.setText("Drinks");
+        DrinkListBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DrinkListBTNActionPerformed(evt);
+            }
+        });
+
+        DessertListBTN.setText("Desserts");
+        DessertListBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DessertListBTNActionPerformed(evt);
+            }
+        });
+
+        NextPageBTN.setText("Next Page");
+        NextPageBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NextPageBTNActionPerformed(evt);
+            }
+        });
+
+        PrevPageBTN.setText("Prev Page");
+        PrevPageBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrevPageBTNActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(ComboListBTN)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Combo5BTN, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Menu5BTN, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Combo1BTN)
-                                .addGap(109, 109, 109)))
+                                .addComponent(Menu1BTN)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)))
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Combo6BTN)
-                            .addComponent(Combo2BTN))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                            .addComponent(Menu6BTN)
+                            .addComponent(Menu2BTN))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Combo3BTN)
-                            .addComponent(Combo7BTN))
-                        .addGap(105, 105, 105)
+                            .addComponent(Menu3BTN)
+                            .addComponent(Menu7BTN))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Combo8BTN)
-                            .addComponent(Combo4BTN))
-                        .addGap(64, 64, 64))))
+                            .addComponent(Menu8BTN)
+                            .addComponent(Menu4BTN))
+                        .addContainerGap(64, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(ComboListBTN)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(EntreeListBTN)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(SidesListBTN)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(DrinkListBTN)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(DessertListBTN)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PrevPageBTN)
+                .addGap(150, 150, 150)
+                .addComponent(NextPageBTN)
+                .addGap(201, 201, 201))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ComboListBTN)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ComboListBTN)
+                    .addComponent(EntreeListBTN)
+                    .addComponent(SidesListBTN)
+                    .addComponent(DrinkListBTN)
+                    .addComponent(DessertListBTN))
                 .addGap(107, 107, 107)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Combo4BTN)
-                    .addComponent(Combo1BTN)
-                    .addComponent(Combo2BTN)
-                    .addComponent(Combo3BTN))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                    .addComponent(Menu4BTN)
+                    .addComponent(Menu1BTN)
+                    .addComponent(Menu2BTN)
+                    .addComponent(Menu3BTN))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Combo5BTN)
-                    .addComponent(Combo6BTN)
-                    .addComponent(Combo7BTN)
-                    .addComponent(Combo8BTN))
-                .addGap(182, 182, 182))
+                    .addComponent(Menu5BTN)
+                    .addComponent(Menu6BTN)
+                    .addComponent(Menu7BTN)
+                    .addComponent(Menu8BTN))
+                .addGap(113, 113, 113)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NextPageBTN)
+                    .addComponent(PrevPageBTN))
+                .addGap(40, 40, 40))
         );
 
-        jTabbedPane1.addTab("Combos", jPanel1);
+        MenuTab.addTab("Menu", jPanel1);
 
         jScrollPane1.setViewportView(CartList);
 
@@ -291,19 +308,19 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
+                            .addComponent(BackBTN)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(ClearCart, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(SubmitOrder)))))
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(MenuTab, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1)
+                .addComponent(BackBTN)
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1)
                 .addGap(3, 3, 3)
@@ -314,7 +331,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(MenuTab, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -322,12 +339,48 @@ public class NewJFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BackBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBTNActionPerformed
         dispose();
         FirstForm f = new FirstForm();
         f.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BackBTNActionPerformed
 
+    
+    private void formatButtons() {
+        
+        DefaultListModel<javax.swing.JButton> buttonsArray = new DefaultListModel();
+        buttonsArray.addElement(Menu1BTN);
+        buttonsArray.addElement(Menu2BTN);
+        buttonsArray.addElement(Menu3BTN);
+        buttonsArray.addElement(Menu4BTN);
+        buttonsArray.addElement(Menu5BTN);
+        buttonsArray.addElement(Menu6BTN);
+        buttonsArray.addElement(Menu7BTN);
+        buttonsArray.addElement(Menu8BTN);
+        
+        Integer itemsOnPage = ItemList.size() - currentFirstItem;
+        if (itemsOnPage > 8) {
+            itemsOnPage = 8;
+        }
+        if (currentFirstItem + 8 < ItemList.size()) {
+            NextPageBTN.setVisible(true);
+        } else {
+            NextPageBTN.setVisible(false);
+        }
+        if (currentFirstItem == 0) {
+            PrevPageBTN.setVisible(false);
+        } else {
+            PrevPageBTN.setVisible(true);
+        }
+        for (int i = 0; i < itemsOnPage; i++) {
+            buttonsArray.elementAt(i).setVisible(true);
+            buttonsArray.elementAt(i).setText(ItemList.elementAt(currentFirstItem+i));
+        }
+        for (int i = itemsOnPage; i < 8; i++) {
+            buttonsArray.elementAt(i).setVisible(false);
+        }
+    }
+    
     private void ClearCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearCartActionPerformed
         // TODO add your handling code here:
         dm.clear();
@@ -338,64 +391,139 @@ public class NewJFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_SubmitOrderActionPerformed
 
-    private void Combo8BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo8BTNActionPerformed
-        // TODO add your handling code here:
-        addToList(Combo8BTN.getText());
-    }//GEN-LAST:event_Combo8BTNActionPerformed
+    private void PrevPageBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrevPageBTNActionPerformed
+        currentFirstItem -= 8;
+        formatButtons();
+    }//GEN-LAST:event_PrevPageBTNActionPerformed
 
-    private void Combo7BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo7BTNActionPerformed
+    private void NextPageBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextPageBTNActionPerformed
         // TODO add your handling code here:
-        addToList(Combo7BTN.getText());
-    }//GEN-LAST:event_Combo7BTNActionPerformed
+        currentFirstItem += 8;
+        formatButtons();
+    }//GEN-LAST:event_NextPageBTNActionPerformed
 
-    private void Combo6BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo6BTNActionPerformed
+    private void DessertListBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DessertListBTNActionPerformed
         // TODO add your handling code here:
-        addToList(Combo6BTN.getText());
-    }//GEN-LAST:event_Combo6BTNActionPerformed
+        ResultSet result = db.query("SELECT * FROM public.\"MenuItems\" WHERE \"ItemID\" LIKE \'D%\'");
+        ItemList.clear();
+        currentFirstItem = 0;
+        try {
+            while(result.next()){
+                ItemList.addElement(result.getString("Name"));
+            }
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Query Error");
+        }
 
-    private void Combo3BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo3BTNActionPerformed
-        // TODO add your handling code here:
-        addToList(Combo3BTN.getText());
-    }//GEN-LAST:event_Combo3BTNActionPerformed
+        formatButtons();
 
-    private void Combo5BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo5BTNActionPerformed
-        // TODO add your handling code here:
-        addToList(Combo5BTN.getText());
-    }//GEN-LAST:event_Combo5BTNActionPerformed
+    }//GEN-LAST:event_DessertListBTNActionPerformed
 
-    private void Combo2BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo2BTNActionPerformed
+    private void DrinkListBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DrinkListBTNActionPerformed
         // TODO add your handling code here:
-        addToList(Combo2BTN.getText());
-    }//GEN-LAST:event_Combo2BTNActionPerformed
+        ResultSet result = db.query("SELECT * FROM public.\"MenuItems\" WHERE \"ItemID\" LIKE \'B%\'");
+        ItemList.clear();
+        currentFirstItem = 0;
+        try {
+            while(result.next()){
+                ItemList.addElement(result.getString("Name"));
+            }
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Query Error");
+        }
 
-    private void Combo4BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo4BTNActionPerformed
-        // TODO add your handling code here:
-        addToList(Combo4BTN.getText());
-    }//GEN-LAST:event_Combo4BTNActionPerformed
+        formatButtons();
 
-    private void Combo1BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo1BTNActionPerformed
+    }//GEN-LAST:event_DrinkListBTNActionPerformed
+
+    private void SidesListBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SidesListBTNActionPerformed
         // TODO add your handling code here:
-        addToList(Combo1BTN.getText());
-    }//GEN-LAST:event_Combo1BTNActionPerformed
+        ResultSet result = db.query("SELECT * FROM public.\"MenuItems\" WHERE \"ItemID\" LIKE \'S%\'");
+        ItemList.clear();
+        currentFirstItem = 0;
+        try {
+            while(result.next()){
+                ItemList.addElement(result.getString("Name"));
+            }
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Query Error");
+        }
+
+        formatButtons();
+
+    }//GEN-LAST:event_SidesListBTNActionPerformed
+
+    private void EntreeListBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EntreeListBTNActionPerformed
+        // TODO add your handling code here:
+        ResultSet result = db.query("SELECT * FROM public.\"MenuItems\" WHERE \"ItemID\" LIKE \'E%\'");
+        ItemList.clear();
+        currentFirstItem = 0;
+        try {
+            while(result.next()){
+                ItemList.addElement(result.getString("Name"));
+            }
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Query Error");
+        }
+
+        formatButtons();
+
+    }//GEN-LAST:event_EntreeListBTNActionPerformed
 
     private void ComboListBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboListBTNActionPerformed
         // TODO add your handling code here:
         ResultSet result = db.query("SELECT * FROM public.\"Combos\"");
         ItemList.clear();
+        currentFirstItem = 0;
         try {
             while(result.next()){
                 ItemList.addElement(result.getString("Name"));
             }
-            //CartList.setModel(ItemList);
-            for(int i = 0; i < 7; i++){
-                String num = Integer.toString(i+1);
-                String comboName = "Combo" + num + "BTN";
-                //comboName.setText(ItemList[i]);
-            }
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Query Error");
         }
+        formatButtons();
     }//GEN-LAST:event_ComboListBTNActionPerformed
+
+    private void Menu8BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu8BTNActionPerformed
+        // TODO add your handling code here:
+        addToList(Menu8BTN.getText());
+    }//GEN-LAST:event_Menu8BTNActionPerformed
+
+    private void Menu7BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu7BTNActionPerformed
+        // TODO add your handling code here:
+        addToList(Menu7BTN.getText());
+    }//GEN-LAST:event_Menu7BTNActionPerformed
+
+    private void Menu6BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu6BTNActionPerformed
+        // TODO add your handling code here:
+        addToList(Menu6BTN.getText());
+    }//GEN-LAST:event_Menu6BTNActionPerformed
+
+    private void Menu3BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu3BTNActionPerformed
+        // TODO add your handling code here:
+        addToList(Menu3BTN.getText());
+    }//GEN-LAST:event_Menu3BTNActionPerformed
+
+    private void Menu5BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu5BTNActionPerformed
+        // TODO add your handling code here:
+        addToList(Menu5BTN.getText());
+    }//GEN-LAST:event_Menu5BTNActionPerformed
+
+    private void Menu2BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu2BTNActionPerformed
+        // TODO add your handling code here:
+        addToList(Menu2BTN.getText());
+    }//GEN-LAST:event_Menu2BTNActionPerformed
+
+    private void Menu4BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu4BTNActionPerformed
+        // TODO add your handling code here:
+        addToList(Menu4BTN.getText());
+    }//GEN-LAST:event_Menu4BTNActionPerformed
+
+    private void Menu1BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu1BTNActionPerformed
+        // TODO add your handling code here:
+        addToList(Menu1BTN.getText());
+    }//GEN-LAST:event_Menu1BTNActionPerformed
 
     
     
@@ -437,32 +565,36 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackBTN;
     private javax.swing.JList<String> CartList;
     private javax.swing.JButton ClearCart;
-    private javax.swing.JButton Combo1BTN;
-    private javax.swing.JButton Combo2BTN;
-    private javax.swing.JButton Combo3BTN;
-    private javax.swing.JButton Combo4BTN;
-    private javax.swing.JButton Combo5BTN;
-    private javax.swing.JButton Combo6BTN;
-    private javax.swing.JButton Combo7BTN;
-    private javax.swing.JButton Combo8BTN;
     private javax.swing.JButton ComboListBTN;
+    private javax.swing.JButton DessertListBTN;
+    private javax.swing.JButton DrinkListBTN;
+    private javax.swing.JButton EntreeListBTN;
+    private javax.swing.JButton Menu1BTN;
+    private javax.swing.JButton Menu2BTN;
+    private javax.swing.JButton Menu3BTN;
+    private javax.swing.JButton Menu4BTN;
+    private javax.swing.JButton Menu5BTN;
+    private javax.swing.JButton Menu6BTN;
+    private javax.swing.JButton Menu7BTN;
+    private javax.swing.JButton Menu8BTN;
+    private javax.swing.JTabbedPane MenuTab;
+    private javax.swing.JButton NextPageBTN;
+    private javax.swing.JButton PrevPageBTN;
+    private javax.swing.JButton SidesListBTN;
     private javax.swing.JButton SubmitOrder;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }
