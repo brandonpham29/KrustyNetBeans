@@ -21,6 +21,7 @@ public class NewJFrame extends javax.swing.JFrame {
     DefaultListModel dm = new DefaultListModel(); //Krabby patty, krusty pizza
     DefaultListModel TotalOrder = new DefaultListModel(); //E1. E2
     DefaultListModel<String> ItemList = new DefaultListModel();
+    DefaultListModel<String> PriceList = new DefaultListModel();
     int currentFirstItem = 0;
     
     public void addToList(String name){
@@ -62,6 +63,14 @@ public class NewJFrame extends javax.swing.JFrame {
         DessertListBTN = new javax.swing.JButton();
         NextPageBTN = new javax.swing.JButton();
         PrevPageBTN = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         CartList = new javax.swing.JList<>();
@@ -189,32 +198,60 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("jLabel2");
+
+        jLabel3.setText("jLabel3");
+
+        jLabel4.setText("jLabel4");
+
+        jLabel5.setText("jLabel5");
+
+        jLabel6.setText("jLabel6");
+
+        jLabel7.setText("jLabel7");
+
+        jLabel8.setText("jLabel8");
+
+        jLabel9.setText("jLabel9");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(190, Short.MAX_VALUE)
+                .addComponent(PrevPageBTN)
+                .addGap(150, 150, 150)
+                .addComponent(NextPageBTN)
+                .addGap(184, 184, 184))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Menu5BTN, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Menu1BTN)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)))
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(Menu5BTN)
+                            .addComponent(Menu1BTN)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(Menu2BTN)
                             .addComponent(Menu6BTN)
-                            .addComponent(Menu2BTN))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(Menu3BTN)
-                            .addComponent(Menu7BTN))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Menu7BTN)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(Menu4BTN)
                             .addComponent(Menu8BTN)
-                            .addComponent(Menu4BTN))
-                        .addContainerGap(64, Short.MAX_VALUE))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel9))
+                        .addGap(23, 23, 23))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(ComboListBTN)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -225,13 +262,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(DrinkListBTN)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(DessertListBTN)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PrevPageBTN)
-                .addGap(150, 150, 150)
-                .addComponent(NextPageBTN)
-                .addGap(201, 201, 201))
+                        .addGap(20, 20, 20))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,19 +274,31 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(SidesListBTN)
                     .addComponent(DrinkListBTN)
                     .addComponent(DessertListBTN))
-                .addGap(107, 107, 107)
+                .addGap(99, 99, 99)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Menu4BTN)
                     .addComponent(Menu1BTN)
                     .addComponent(Menu2BTN)
                     .addComponent(Menu3BTN))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addGap(58, 58, 58)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Menu5BTN)
                     .addComponent(Menu6BTN)
                     .addComponent(Menu7BTN)
                     .addComponent(Menu8BTN))
-                .addGap(113, 113, 113)
+                .addGap(97, 97, 97)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NextPageBTN)
                     .addComponent(PrevPageBTN))
@@ -358,6 +401,16 @@ public class NewJFrame extends javax.swing.JFrame {
         buttonsArray.addElement(Menu7BTN);
         buttonsArray.addElement(Menu8BTN);
         
+        DefaultListModel<javax.swing.JLabel> textFieldArray = new DefaultListModel();
+        textFieldArray.addElement(jLabel2);
+        textFieldArray.addElement(jLabel3);
+        textFieldArray.addElement(jLabel4);
+        textFieldArray.addElement(jLabel5);
+        textFieldArray.addElement(jLabel6);
+        textFieldArray.addElement(jLabel7);
+        textFieldArray.addElement(jLabel8);
+        textFieldArray.addElement(jLabel9);
+        
         Integer itemsOnPage = ItemList.size() - currentFirstItem;
         if (itemsOnPage > 8) {
             itemsOnPage = 8;
@@ -375,9 +428,12 @@ public class NewJFrame extends javax.swing.JFrame {
         for (int i = 0; i < itemsOnPage; i++) {
             buttonsArray.elementAt(i).setVisible(true);
             buttonsArray.elementAt(i).setText(ItemList.elementAt(currentFirstItem+i));
+            textFieldArray.elementAt(i).setVisible(true);
+            textFieldArray.elementAt(i).setText(PriceList.elementAt(currentFirstItem+i));
         }
         for (int i = itemsOnPage; i < 8; i++) {
             buttonsArray.elementAt(i).setVisible(false);
+            textFieldArray.elementAt(i).setVisible(false);
         }
     }
     
@@ -406,10 +462,12 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         ResultSet result = db.query("SELECT * FROM public.\"MenuItems\" WHERE \"ItemID\" LIKE \'D%\'");
         ItemList.clear();
+        PriceList.clear();
         currentFirstItem = 0;
         try {
             while(result.next()){
                 ItemList.addElement(result.getString("Name"));
+                PriceList.addElement("$" + String.valueOf(result.getDouble("Price")));
             }
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Query Error");
@@ -423,10 +481,12 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         ResultSet result = db.query("SELECT * FROM public.\"MenuItems\" WHERE \"ItemID\" LIKE \'B%\'");
         ItemList.clear();
+        PriceList.clear();
         currentFirstItem = 0;
         try {
             while(result.next()){
                 ItemList.addElement(result.getString("Name"));
+                PriceList.addElement("$" + String.valueOf(result.getDouble("Price")));
             }
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Query Error");
@@ -440,10 +500,12 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         ResultSet result = db.query("SELECT * FROM public.\"MenuItems\" WHERE \"ItemID\" LIKE \'S%\'");
         ItemList.clear();
+        PriceList.clear();
         currentFirstItem = 0;
         try {
             while(result.next()){
                 ItemList.addElement(result.getString("Name"));
+                PriceList.addElement("$" + String.valueOf(result.getDouble("Price")));
             }
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Query Error");
@@ -457,10 +519,12 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         ResultSet result = db.query("SELECT * FROM public.\"MenuItems\" WHERE \"ItemID\" LIKE \'E%\'");
         ItemList.clear();
+        PriceList.clear();
         currentFirstItem = 0;
         try {
             while(result.next()){
                 ItemList.addElement(result.getString("Name"));
+                PriceList.addElement("$" + String.valueOf(result.getDouble("Price")));
             }
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Query Error");
@@ -474,10 +538,12 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         ResultSet result = db.query("SELECT * FROM public.\"Combos\"");
         ItemList.clear();
+        PriceList.clear();
         currentFirstItem = 0;
         try {
             while(result.next()){
                 ItemList.addElement(result.getString("Name"));
+                PriceList.addElement("$" + String.valueOf(result.getDouble("Price")));
             }
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Query Error");
@@ -525,12 +591,6 @@ public class NewJFrame extends javax.swing.JFrame {
         addToList(Menu1BTN.getText());
     }//GEN-LAST:event_Menu1BTNActionPerformed
 
-    
-    
-    
-    
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -566,7 +626,6 @@ public class NewJFrame extends javax.swing.JFrame {
         });
     }
     
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackBTN;
@@ -590,6 +649,14 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton SidesListBTN;
     private javax.swing.JButton SubmitOrder;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
