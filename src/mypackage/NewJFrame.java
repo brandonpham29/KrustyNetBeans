@@ -3,6 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+// temp comment
+
 package mypackage;
 import javax.swing.*;
 import javax.swing.JOptionPane;
