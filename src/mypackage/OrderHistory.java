@@ -24,9 +24,10 @@ public class OrderHistory extends javax.swing.JFrame {
     }
     public void DisplayTable(){
         try{
-            ResultSet result = db.query("SELECT * FROM public.\"OrderHistory\" ORDER BY \"OrderID\" DESC LIMIT 100 ");
+            ResultSet result = db.query("SELECT * FROM public.\"OrderHistory\" ORDER BY \"OrderID\" DESC LIMIT 100");
             result.next();
             OrderTable.setModel(DbUtils.resultSetToTableModel(result));
+            OrderTable.setAutoCreateRowSorter(true);
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error connecting to Database");
         }
@@ -43,11 +44,26 @@ public class OrderHistory extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        ManagerPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         OrderTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        DateTextField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        CustomerIDTextField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        OrderIDTextField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        SortOrderHistoryBTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jButton1.setText("Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         OrderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -60,12 +76,39 @@ public class OrderHistory extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        OrderTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(OrderTable);
 
-        jButton1.setText("Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ManagerPane1.addTab("Order History", jScrollPane1);
+
+        DateTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                DateTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Date");
+
+        CustomerIDTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CustomerIDTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("CustomerID");
+
+        OrderIDTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OrderIDTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("OrderID");
+
+        SortOrderHistoryBTN.setText("Sort Order History");
+        SortOrderHistoryBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SortOrderHistoryBTNActionPerformed(evt);
             }
         });
 
@@ -73,18 +116,46 @@ public class OrderHistory extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(ManagerPane1)
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE))
+                .addGap(79, 79, 79)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel1)
+                    .addComponent(DateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel2)
+                    .addComponent(CustomerIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel3)
+                    .addComponent(OrderIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(SortOrderHistoryBTN)
+                .addContainerGap(254, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(SortOrderHistoryBTN)
+                    .addComponent(OrderIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CustomerIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ManagerPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
                 .addComponent(jButton1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(440, 440, 440))
         );
 
         pack();
@@ -96,6 +167,64 @@ public class OrderHistory extends javax.swing.JFrame {
         FirstForm f = new FirstForm();
         f.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void DateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DateTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DateTextFieldActionPerformed
+
+    private void CustomerIDTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerIDTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CustomerIDTextFieldActionPerformed
+
+    private void OrderIDTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderIDTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_OrderIDTextFieldActionPerformed
+
+    private void SortOrderHistoryBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SortOrderHistoryBTNActionPerformed
+        try {
+            String query = "SELECT * FROM public.\"OrderHistory\" ";
+            String CustomerID = CustomerIDTextField.getText();
+            String Date = DateTextField.getText();
+            Integer OrderID = 0;
+            try {
+                if (!OrderIDTextField.getText().equals("")) {
+                    OrderID = Integer.parseInt(OrderIDTextField.getText());
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+                return;
+            }
+            boolean firstQuery = true;
+            if (!CustomerID.equals("")) {
+                query += " WHERE \"CustomerID\" = " + CustomerID;
+                firstQuery = false;
+            }
+            if (!Date.equals("")) {
+                if (firstQuery) {
+                    query += " WHERE \"Date\" = \'" + Date + "\'";
+                    firstQuery = false;
+                } else {
+                    query += " AND \"Date\" = \'" + Date + "\'";
+                }
+            }
+            if (OrderID > 0) {
+                if (firstQuery) {
+                    query += " WHERE \"OrderID\" >= " + String.valueOf(OrderID);
+                    firstQuery = false;
+                } else {
+                    query += " AND \"OrderID\" >= " + String.valueOf(OrderID);
+                }
+            }
+            query += " ORDER BY \"OrderID\" LIMIT 100";
+            JOptionPane.showMessageDialog(null, query);
+            ResultSet result = db.query(query);
+            result.next();
+            OrderTable.setModel(DbUtils.resultSetToTableModel(result));
+            OrderTable.setAutoCreateRowSorter(true);
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error connecting to Database");
+        }
+    }//GEN-LAST:event_SortOrderHistoryBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,8 +262,16 @@ public class OrderHistory extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField CustomerIDTextField;
+    private javax.swing.JTextField DateTextField;
+    private javax.swing.JTabbedPane ManagerPane1;
+    private javax.swing.JTextField OrderIDTextField;
     private javax.swing.JTable OrderTable;
+    private javax.swing.JButton SortOrderHistoryBTN;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
