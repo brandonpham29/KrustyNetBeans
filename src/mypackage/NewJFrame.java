@@ -10,6 +10,7 @@ package mypackage;
 import javax.swing.*;
 import javax.swing.JOptionPane;
 import java.sql.*;
+import java.time.LocalDate;
 
 /**
  *
@@ -21,10 +22,11 @@ public class NewJFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     DBSearch db = new DBSearch();
-    DefaultListModel dm = new DefaultListModel(); //Krabby patty, krusty pizza
+    DefaultListModel<String> dm = new DefaultListModel(); //Krabby patty, krusty pizza
     DefaultListModel TotalOrder = new DefaultListModel(); //E1. E2
     DefaultListModel<String> ItemList = new DefaultListModel();
     DefaultListModel<String> PriceList = new DefaultListModel();
+    Integer CustomerID;
     int currentFirstItem = 0;
     
     public void addToList(String name){
@@ -32,8 +34,10 @@ public class NewJFrame extends javax.swing.JFrame {
         
         CartList.setModel(dm);
     }
-    public NewJFrame() {
+    public NewJFrame(Integer custID) {
+        CustomerID = custID;
         initComponents();
+        ComboListBTNActionPerformed_helper();
     }
 
     /**
@@ -440,14 +444,100 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }
     
-    private void ClearCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearCartActionPerformed
-        // TODO add your handling code here:
+    private void ClearCartActionPerformed_helper() {
         dm.clear();
         CartList.setModel(dm);
+    }
+    
+    private void ClearCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearCartActionPerformed
+        ClearCartActionPerformed_helper();
     }//GEN-LAST:event_ClearCartActionPerformed
 
     private void SubmitOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitOrderActionPerformed
+        ResultSet result = db.query("SELECT * FROM public.\"OrderHistory\" ORDER BY \"OrderID\" DESC LIMIT 1");
+        Integer OrderID;
+        try {
+            result.next();
+            OrderID = result.getInt("OrderID") + 1;  
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error getting Order ID");
+            return;
+        }
+
+        Integer i = 0;
+        String order = "{";
+        ResultSet combosresult = db.query("SELECT * FROM public.\"Combos\"");
         
+        DefaultListModel<String> combosarray = new DefaultListModel();
+        
+        try {
+            while (combosresult.next()) {
+                combosarray.addElement(combosresult.getString("Name"));
+            } 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        
+        
+        while (i < dm.size()) {
+            String currItem = dm.getElementAt(i);
+            i++;
+            
+            boolean isCombo = false;
+            
+            for (int j = 0; j < combosarray.size(); j++) {
+                if (combosarray.getElementAt(j).equals(currItem)) {
+                    isCombo = true;
+                    break;
+                }
+            }
+            
+            if (isCombo) {
+                String combo;
+                result = db.query("SELECT * FROM public.\"Combos\" WHERE \"Name\" = \'" + currItem + "\'");
+                try {
+                    result.next();
+                    combo = result.getString("MenuItems");
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    return;
+                }
+                combo = combo.substring(1,combo.length()-1);
+                if (i < dm.size()) {
+                    order += combo + ",";
+                } else {
+                    order += combo;
+                }
+            } else {
+                result = db.query("SELECT * FROM public.\"MenuItems\" WHERE \"Name\" = \'" + currItem + "\'");
+                try {  
+                    result.next();
+                    currItem = result.getString("ItemID");
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error getting Menu Item");
+                    return;
+                }
+                if (i < dm.size()) {
+                    order += currItem + ",";
+                } else {
+                    order += currItem;
+                }
+            }
+        }
+        order += "}";
+        
+        if (order.equals("{}")) {
+            return;
+        }
+        
+        String insert_query = "INSERT INTO public.\"OrderHistory\"(\"OrderID\",";
+        insert_query += "\"CustomerID\", \"Date\", \"TotalOrder\") VALUES (";
+        insert_query += String.valueOf(OrderID) + ", " + String.valueOf(CustomerID);
+        insert_query += ", \'" + LocalDate.now() + "\', \'" + order + "\')";
+        
+        db.insert(insert_query);
+
+        ClearCartActionPerformed_helper();
     }//GEN-LAST:event_SubmitOrderActionPerformed
 
     private void PrevPageBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrevPageBTNActionPerformed
@@ -627,8 +717,7 @@ public class NewJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NewJFrame a = new NewJFrame();
-                a.setVisible(true);
+                new NewJFrame(0).setVisible(true);
             }
         });
     }

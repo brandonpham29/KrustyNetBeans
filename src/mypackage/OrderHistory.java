@@ -24,7 +24,7 @@ public class OrderHistory extends javax.swing.JFrame {
     }
     public void DisplayTable(){
         try{
-            ResultSet result = db.query("SELECT * FROM public.\"OrderHistory\" LIMIT 100");
+            ResultSet result = db.query("SELECT * FROM public.\"OrderHistory\" ORDER BY \"OrderID\" DESC LIMIT 100 ");
             result.next();
             OrderTable.setModel(DbUtils.resultSetToTableModel(result));
         } catch(Exception e){

@@ -149,7 +149,7 @@ public class FirstForm extends javax.swing.JFrame {
                 && Integer.parseInt(ID) == Integer.parseInt(dbID)){
             if(Integer.parseInt(ID) > 0){
                 dispose();
-                NewJFrame f = new NewJFrame();
+                NewJFrame f = new NewJFrame(Integer.parseInt(ID));
                 f.setVisible(true);
             } else{
                 dispose();

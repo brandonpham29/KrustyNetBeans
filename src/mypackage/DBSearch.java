@@ -53,6 +53,17 @@ public class DBSearch {
         }
         return true;
     }
+    
+    public boolean exists(String sql_exists) {
+        try {
+            stmt.executeUpdate(sql_exists);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Error with sql exists statement");
+            JOptionPane.showMessageDialog(null, e.getClass().getName() + ": " + e.getMessage());
+            return false;
+        }
+        return true;
+    }
 
 }
 
