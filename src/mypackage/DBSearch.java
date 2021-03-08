@@ -54,9 +54,9 @@ public class DBSearch {
         return true;
     }
     
-    public boolean exists(String sql_exists) {
+    public boolean delete(String sql_delete) {
         try {
-            stmt.executeUpdate(sql_exists);
+            stmt.executeUpdate(sql_delete);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"Error with sql exists statement");
             JOptionPane.showMessageDialog(null, e.getClass().getName() + ": " + e.getMessage());
@@ -64,7 +64,6 @@ public class DBSearch {
         }
         return true;
     }
-
 }
 
 

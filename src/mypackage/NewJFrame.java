@@ -530,12 +530,12 @@ public class NewJFrame extends javax.swing.JFrame {
             return;
         }
         
-        String insert_query = "INSERT INTO public.\"OrderHistory\"(\"OrderID\",";
-        insert_query += "\"CustomerID\", \"Date\", \"TotalOrder\") VALUES (";
-        insert_query += String.valueOf(OrderID) + ", " + String.valueOf(CustomerID);
-        insert_query += ", \'" + LocalDate.now() + "\', \'" + order + "\')";
+        String insert_stmt = "INSERT INTO public.\"OrderHistory\"(\"OrderID\",";
+        insert_stmt += "\"CustomerID\", \"Date\", \"TotalOrder\") VALUES (";
+        insert_stmt += String.valueOf(OrderID) + ", " + String.valueOf(CustomerID);
+        insert_stmt += ", \'" + LocalDate.now() + "\', \'" + order + "\')";
         
-        db.insert(insert_query);
+        db.insert(insert_stmt);
 
         ClearCartActionPerformed_helper();
     }//GEN-LAST:event_SubmitOrderActionPerformed

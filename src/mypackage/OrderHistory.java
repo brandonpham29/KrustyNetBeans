@@ -7,6 +7,7 @@ package mypackage;
 import javax.swing.JOptionPane;
 import java.sql.*;
 import net.proteanit.sql.DbUtils;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -18,6 +19,8 @@ public class OrderHistory extends javax.swing.JFrame {
      * Creates new form OrderHistory
      */
     DBSearch db = new DBSearch();
+    
+    
     public OrderHistory() {
         initComponents();
         DisplayTable();
@@ -48,6 +51,21 @@ public class OrderHistory extends javax.swing.JFrame {
         ManagerPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         OrderTable = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        ItemIDTextField = new javax.swing.JTextField();
+        NameTextField = new javax.swing.JTextField();
+        PriceTextField = new javax.swing.JTextField();
+        BaseIngredientsTextField = new javax.swing.JTextField();
+        DefaultIngredientsTextField = new javax.swing.JTextField();
+        PermissibleIngredientsTextField = new javax.swing.JTextField();
+        Update_Add_BTN = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        DeleteItemBTN = new javax.swing.JButton();
         DateTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         CustomerIDTextField = new javax.swing.JTextField();
@@ -55,6 +73,9 @@ public class OrderHistory extends javax.swing.JFrame {
         OrderIDTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         SortOrderHistoryBTN = new javax.swing.JButton();
+        ItemNameTextField = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,9 +98,124 @@ public class OrderHistory extends javax.swing.JFrame {
             }
         ));
         OrderTable.getTableHeader().setReorderingAllowed(false);
+        OrderTable.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                OrderTableFocusGained(evt);
+            }
+        });
         jScrollPane1.setViewportView(OrderTable);
 
         ManagerPane1.addTab("Order History", jScrollPane1);
+
+        ItemIDTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemIDTextFieldActionPerformed(evt);
+            }
+        });
+
+        NameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NameTextFieldActionPerformed(evt);
+            }
+        });
+
+        PermissibleIngredientsTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PermissibleIngredientsTextFieldActionPerformed(evt);
+            }
+        });
+
+        Update_Add_BTN.setText("Update/Add");
+        Update_Add_BTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Update_Add_BTNActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("ItemID(dont edit)");
+
+        jLabel6.setText("Name");
+
+        jLabel7.setText("Price");
+
+        jLabel8.setText("Base Ingredients");
+
+        jLabel9.setText("Default Ingredients");
+
+        jLabel10.setText("Permissible Ingredients");
+
+        DeleteItemBTN.setText("Delete Item");
+        DeleteItemBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteItemBTNActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(ItemIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(PriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(BaseIngredientsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(DefaultIngredientsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(PermissibleIngredientsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)))
+                    .addComponent(Update_Add_BTN, javax.swing.GroupLayout.Alignment.CENTER))
+                .addContainerGap(25, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(DeleteItemBTN)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ItemIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BaseIngredientsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DefaultIngredientsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PermissibleIngredientsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+                .addComponent(Update_Add_BTN)
+                .addGap(26, 26, 26)
+                .addComponent(DeleteItemBTN)
+                .addContainerGap())
+        );
+
+        ManagerPane1.addTab("Edit Menu Items", jPanel1);
 
         DateTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,10 +241,19 @@ public class OrderHistory extends javax.swing.JFrame {
 
         jLabel3.setText("OrderID");
 
-        SortOrderHistoryBTN.setText("Sort Order History");
+        SortOrderHistoryBTN.setText("Sort");
         SortOrderHistoryBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SortOrderHistoryBTNActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Name of Item to Update/Add");
+
+        jButton4.setText("Search");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
             }
         });
 
@@ -120,7 +265,7 @@ public class OrderHistory extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1)
-                .addGap(79, 79, 79)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel1)
                     .addComponent(DateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -134,23 +279,32 @@ public class OrderHistory extends javax.swing.JFrame {
                     .addComponent(OrderIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(SortOrderHistoryBTN)
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(ItemNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jButton4))
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel1)
+                    .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(SortOrderHistoryBTN)
                     .addComponent(OrderIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CustomerIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(DateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ItemNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton4)
+                .addGap(2, 2, 2)
                 .addComponent(ManagerPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
@@ -162,6 +316,7 @@ public class OrderHistory extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
         FirstForm f = new FirstForm();
@@ -169,7 +324,7 @@ public class OrderHistory extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void DateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DateTextFieldActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here: {TODO week 4}
     }//GEN-LAST:event_DateTextFieldActionPerformed
 
     private void CustomerIDTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerIDTextFieldActionPerformed
@@ -216,15 +371,209 @@ public class OrderHistory extends javax.swing.JFrame {
                 }
             }
             query += " ORDER BY \"OrderID\" LIMIT 100";
-            JOptionPane.showMessageDialog(null, query);
             ResultSet result = db.query(query);
             result.next();
             OrderTable.setModel(DbUtils.resultSetToTableModel(result));
             OrderTable.setAutoCreateRowSorter(true);
+            
+            CustomerIDTextField.setText("");
+            DateTextField.setText("");
+            OrderIDTextField.setText("");
+            
         } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Error connecting to Database");
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_SortOrderHistoryBTNActionPerformed
+
+    private void OrderTableFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_OrderTableFocusGained
+        //sfhhgkdfhgdhgdjkghdfgyidygridfgjkdfhg
+    }//GEN-LAST:event_OrderTableFocusGained
+
+    private void ItemIDTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemIDTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ItemIDTextFieldActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        String ItemName = ItemNameTextField.getText();
+        
+        ResultSet menuresult = db.query("SELECT * FROM public.\"MenuItems\"");
+        
+        DefaultListModel<String> menuArray = new DefaultListModel();
+        
+        
+        try {
+            while (menuresult.next()) {
+                menuArray.addElement(menuresult.getString("Name"));
+            } 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        
+        boolean isInMenu = false;
+        
+        for (int j = 0; j < menuArray.size(); j++) {
+            if (menuArray.getElementAt(j).equals(ItemName)) {
+                isInMenu = true;
+                break;
+            }
+        }
+        
+        if (!isInMenu) {
+            ItemNameTextField.setText("");
+            ItemIDTextField.setText("");
+            NameTextField.setText("");
+            PriceTextField.setText("");
+            BaseIngredientsTextField.setText("");
+            DefaultIngredientsTextField.setText("");
+            PermissibleIngredientsTextField.setText("");
+            JOptionPane.showMessageDialog(null, "Item is not in menu, fill in fields below to add it");
+            return;
+        }
+        
+        
+        if (!ItemName.equals("")) {
+            ResultSet result = db.query("SELECT * FROM public.\"MenuItems\" WHERE \"Name\" = \'" + ItemName + "\'");
+            try {
+                result.next();
+                String ItemID = result.getString("ItemID");
+                String Price = result.getString("Price");
+                String BaseIngredients = result.getString("BaseIngredients");
+                String DefaultIngredients = result.getString("DefaultIngredients");
+                String PermissibleIngredients = result.getString("PermissibleIngredients");
+                
+                ItemIDTextField.setText(ItemID);
+                NameTextField.setText(ItemName);
+                PriceTextField.setText(Price);
+                BaseIngredientsTextField.setText(BaseIngredients);
+                DefaultIngredientsTextField.setText(DefaultIngredients);
+                PermissibleIngredientsTextField.setText(PermissibleIngredients);
+                
+                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        } else {
+            return;
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void Update_Add_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Update_Add_BTNActionPerformed
+        
+        ResultSet menuresult = db.query("SELECT * FROM public.\"MenuItems\"");
+        DefaultListModel<String> menuIDArray = new DefaultListModel();
+        try {
+            while (menuresult.next()) {
+                menuIDArray.addElement(menuresult.getString("ItemID"));
+            } 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        
+        String ItemID = ItemIDTextField.getText();
+        String Name = NameTextField.getText();
+        String Price = PriceTextField.getText();
+        String BaseIngredients = BaseIngredientsTextField.getText();
+        String DefaultIngredients = DefaultIngredientsTextField.getText();
+        String PermissibleIngredients = PermissibleIngredientsTextField.getText();
+        
+        
+        boolean exitCondition = ItemID.isEmpty() || Name.isEmpty() || Price.isEmpty();
+        exitCondition = exitCondition || BaseIngredients.isEmpty();
+        exitCondition = exitCondition || DefaultIngredients.isEmpty();
+        exitCondition = exitCondition || PermissibleIngredients.isEmpty();
+        if (exitCondition) {
+            JOptionPane.showMessageDialog(null, "Please fill in all fields");
+            return;
+        }
+        
+        boolean isInMenu = false;
+        for (int j = 0; j < menuIDArray.size(); j++) {
+            if (menuIDArray.getElementAt(j).equals(ItemID)) {
+                isInMenu = true;
+                break;
+            }
+        }
+        
+        boolean success = false;
+        if (isInMenu) {
+            String query = "UPDATE public.\"MenuItems\" ";
+            query += "SET \"Name\" = \'" + Name + "\', ";
+            query += "\"Price\" = " + Price + ", ";
+            query += "\"BaseIngredients\" = \'" + BaseIngredients + "\', ";
+            query += "\"DefaultIngredients\" = \'" + DefaultIngredients + "\', ";
+            query += "\"PermissibleIngredients\" = \'" + PermissibleIngredients + "\' ";
+            query += "WHERE \"ItemID\" = \'" + ItemID + "\'";
+            success = db.update(query);
+        } else {
+            String insert_stmt = "INSERT INTO public.\"MenuItems\"(\"ItemID\",";
+            insert_stmt += "\"Name\", \"Price\", \"BaseIngredients\", \"DefaultIngredients\", ";
+            insert_stmt += "\"PermissibleIngredients\") VALUES (\'";
+            insert_stmt += ItemID + "\', \'" + Name + "\', " + Price + ", \'";
+            insert_stmt += BaseIngredients + "\', \'" + DefaultIngredients + "\', \'";
+            insert_stmt += PermissibleIngredients + "\')";
+            success = db.insert(insert_stmt);
+        }
+        
+        if (success) {
+            JOptionPane.showMessageDialog(null, "Success");
+            ItemNameTextField.setText("");
+            ItemIDTextField.setText("");
+            NameTextField.setText("");
+            PriceTextField.setText("");
+            BaseIngredientsTextField.setText("");
+            DefaultIngredientsTextField.setText("");
+            PermissibleIngredientsTextField.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, "Epic fail :(");
+            return;
+        }
+    }//GEN-LAST:event_Update_Add_BTNActionPerformed
+
+    private void NameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NameTextFieldActionPerformed
+
+    private void PermissibleIngredientsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PermissibleIngredientsTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PermissibleIngredientsTextFieldActionPerformed
+
+    private void DeleteItemBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteItemBTNActionPerformed
+        String ItemID = ItemIDTextField.getText();
+        
+        ResultSet menuresult = db.query("SELECT * FROM public.\"MenuItems\"");
+        DefaultListModel<String> menuIDArray = new DefaultListModel();
+        try {
+            while (menuresult.next()) {
+                menuIDArray.addElement(menuresult.getString("ItemID"));
+            } 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        
+        boolean isInMenu = false;
+        for (int j = 0; j < menuIDArray.size(); j++) {
+            if (menuIDArray.getElementAt(j).equals(ItemID)) {
+                isInMenu = true;
+                break;
+            }
+        }
+        
+        if (!isInMenu) {
+            JOptionPane.showMessageDialog(null, "Item is not in menu");
+        } else {
+            String delete_stmt = "DELETE FROM public.\"MenuItems\" WHERE \"ItemID\" = \'" + ItemID + "\'";
+            db.delete(delete_stmt);
+            JOptionPane.showMessageDialog(null, "Item deleted from Database");
+            ItemNameTextField.setText("");
+            ItemIDTextField.setText("");
+            NameTextField.setText("");
+            PriceTextField.setText("");
+            BaseIngredientsTextField.setText("");
+            DefaultIngredientsTextField.setText("");
+            PermissibleIngredientsTextField.setText("");
+        }
+        
+    }//GEN-LAST:event_DeleteItemBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,16 +611,34 @@ public class OrderHistory extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField BaseIngredientsTextField;
     private javax.swing.JTextField CustomerIDTextField;
     private javax.swing.JTextField DateTextField;
+    private javax.swing.JTextField DefaultIngredientsTextField;
+    private javax.swing.JButton DeleteItemBTN;
+    private javax.swing.JTextField ItemIDTextField;
+    private javax.swing.JTextField ItemNameTextField;
     private javax.swing.JTabbedPane ManagerPane1;
+    private javax.swing.JTextField NameTextField;
     private javax.swing.JTextField OrderIDTextField;
     private javax.swing.JTable OrderTable;
+    private javax.swing.JTextField PermissibleIngredientsTextField;
+    private javax.swing.JTextField PriceTextField;
     private javax.swing.JButton SortOrderHistoryBTN;
+    private javax.swing.JButton Update_Add_BTN;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
