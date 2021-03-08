@@ -38,6 +38,7 @@ public class FirstForm extends javax.swing.JFrame {
         login = new javax.swing.JButton();
         customerFirstName = new javax.swing.JTextField();
         customerLastName = new javax.swing.JTextField();
+        shortcutBTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,6 +67,13 @@ public class FirstForm extends javax.swing.JFrame {
             }
         });
 
+        shortcutBTN.setText("shortcut");
+        shortcutBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shortcutBTNActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,13 +97,18 @@ public class FirstForm extends javax.swing.JFrame {
                                 .addComponent(customerLastName))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(332, 332, 332)
-                        .addComponent(login)))
+                        .addComponent(login))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(shortcutBTN)))
                 .addContainerGap(296, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(196, 196, 196)
+                .addGap(29, 29, 29)
+                .addComponent(shortcutBTN)
+                .addGap(144, 144, 144)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(customerFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -165,6 +178,12 @@ public class FirstForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_customerFirstNameActionPerformed
 
+    private void shortcutBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shortcutBTNActionPerformed
+        dispose();
+        OrderHistory f = new OrderHistory();
+        f.setVisible(true);
+    }//GEN-LAST:event_shortcutBTNActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -208,6 +227,7 @@ public class FirstForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton login;
+    private javax.swing.JButton shortcutBTN;
     // End of variables declaration//GEN-END:variables
 
 }
