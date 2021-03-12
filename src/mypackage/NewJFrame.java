@@ -11,6 +11,7 @@ import javax.swing.*;
 import javax.swing.JOptionPane;
 import java.sql.*;
 import java.time.LocalDate;
+import java.lang.*;
 
 /**
  *
@@ -23,15 +24,20 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     DBSearch db = new DBSearch();
     DefaultListModel<String> dm = new DefaultListModel(); //Krabby patty, krusty pizza
-    DefaultListModel TotalOrder = new DefaultListModel(); //E1. E2
-    DefaultListModel<String> ItemList = new DefaultListModel();
+    DefaultListModel<StringPair> CustomerCart = new DefaultListModel(); //E1. E2
+    DefaultListModel<StringPair> ItemList = new DefaultListModel();
     DefaultListModel<String> PriceList = new DefaultListModel();
     Integer CustomerID;
     int currentFirstItem = 0;
     
     public void addToList(String name){
         dm.addElement(name);
-        
+        for (int i = 0; i < ItemList.size(); i++) {
+            if (ItemList.getElementAt(i).name.equals(name)) {
+                CustomerCart.addElement(ItemList.getElementAt(i));
+                break;
+            }
+        }
         CartList.setModel(dm);
     }
     public NewJFrame(Integer custID) {
@@ -314,6 +320,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
         MenuTab.addTab("Menu", jPanel1);
 
+        CartList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CartListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(CartList);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -434,7 +445,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
         for (int i = 0; i < itemsOnPage; i++) {
             buttonsArray.elementAt(i).setVisible(true);
-            buttonsArray.elementAt(i).setText(ItemList.elementAt(currentFirstItem+i));
+            buttonsArray.elementAt(i).setText(ItemList.elementAt(currentFirstItem+i).name);
             textFieldArray.elementAt(i).setVisible(true);
             textFieldArray.elementAt(i).setText(PriceList.elementAt(currentFirstItem+i));
         }
@@ -447,6 +458,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private void ClearCartActionPerformed_helper() {
         dm.clear();
         CartList.setModel(dm);
+        CustomerCart.clear();
     }
     
     private void ClearCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearCartActionPerformed
@@ -454,6 +466,11 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_ClearCartActionPerformed
 
     private void SubmitOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitOrderActionPerformed
+
+        if (CustomerCart.size() == 0) {
+            return;
+        }
+        
         ResultSet result = db.query("SELECT * FROM public.\"OrderHistory\" ORDER BY \"OrderID\" DESC LIMIT 1");
         Integer OrderID;
         try {
@@ -464,72 +481,39 @@ public class NewJFrame extends javax.swing.JFrame {
             return;
         }
 
-        Integer i = 0;
-        String order = "{";
         ResultSet combosresult = db.query("SELECT * FROM public.\"Combos\"");
         
-        DefaultListModel<String> combosarray = new DefaultListModel();
+        DefaultListModel<StringPair> combosarray = new DefaultListModel();
         
         try {
             while (combosresult.next()) {
-                combosarray.addElement(combosresult.getString("Name"));
+                String s1 = String.valueOf(combosresult.getInt("ComboID"));
+                String s2 = combosresult.getString("MenuItems");
+                combosarray.addElement(new StringPair(s1, s2));
             } 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        
-        
-        while (i < dm.size()) {
-            String currItem = dm.getElementAt(i);
-            i++;
-            
-            boolean isCombo = false;
-            
-            for (int j = 0; j < combosarray.size(); j++) {
-                if (combosarray.getElementAt(j).equals(currItem)) {
-                    isCombo = true;
-                    break;
-                }
-            }
-            
-            if (isCombo) {
-                String combo;
-                result = db.query("SELECT * FROM public.\"Combos\" WHERE \"Name\" = \'" + currItem + "\'");
-                try {
-                    result.next();
-                    combo = result.getString("MenuItems");
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                    return;
-                }
-                combo = combo.substring(1,combo.length()-1);
-                if (i < dm.size()) {
-                    order += combo + ",";
-                } else {
-                    order += combo;
-                }
+  
+        String order = "{";
+        for (int i = 0; i < CustomerCart.size(); i++) {
+            StringPair curr = CustomerCart.getElementAt(i);
+            if (Character.isLetter(curr.ID.charAt(0))) {
+                order += curr.ID + ",";
             } else {
-                result = db.query("SELECT * FROM public.\"MenuItems\" WHERE \"Name\" = \'" + currItem + "\'");
-                try {  
-                    result.next();
-                    currItem = result.getString("ItemID");
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error getting Menu Item");
-                    return;
-                }
-                if (i < dm.size()) {
-                    order += currItem + ",";
-                } else {
-                    order += currItem;
+                for (int j = 0; j < combosarray.size(); j++) {
+                    if (combosarray.getElementAt(j).ID.equals(curr.ID)) {
+                        String menuItems = combosarray.getElementAt(j).name;
+                        menuItems = menuItems.substring(1, menuItems.length() - 1);
+                        order += menuItems + ",";
+                    }
                 }
             }
         }
+        order = order.substring(0, order.length() - 1);
         order += "}";
-        
-        if (order.equals("{}")) {
-            return;
-        }
-        
+        JOptionPane.showMessageDialog(null, order);
+
         String insert_stmt = "INSERT INTO public.\"OrderHistory\"(\"OrderID\",";
         insert_stmt += "\"CustomerID\", \"Date\", \"TotalOrder\") VALUES (";
         insert_stmt += String.valueOf(OrderID) + ", " + String.valueOf(CustomerID);
@@ -559,7 +543,9 @@ public class NewJFrame extends javax.swing.JFrame {
         currentFirstItem = 0;
         try {
             while(result.next()){
-                ItemList.addElement(result.getString("Name"));
+                String s1 = result.getString("ItemID");
+                String s2 = result.getString("Name");
+                ItemList.addElement(new StringPair(s1, s2));
                 PriceList.addElement("$" + String.valueOf(result.getDouble("Price")));
             }
         } catch(Exception e){
@@ -578,7 +564,9 @@ public class NewJFrame extends javax.swing.JFrame {
         currentFirstItem = 0;
         try {
             while(result.next()){
-                ItemList.addElement(result.getString("Name"));
+                String s1 = result.getString("ItemID");
+                String s2 = result.getString("Name");
+                ItemList.addElement(new StringPair(s1, s2));
                 PriceList.addElement("$" + String.valueOf(result.getDouble("Price")));
             }
         } catch(Exception e){
@@ -597,7 +585,9 @@ public class NewJFrame extends javax.swing.JFrame {
         currentFirstItem = 0;
         try {
             while(result.next()){
-                ItemList.addElement(result.getString("Name"));
+                String s1 = result.getString("ItemID");
+                String s2 = result.getString("Name");
+                ItemList.addElement(new StringPair(s1, s2));
                 PriceList.addElement("$" + String.valueOf(result.getDouble("Price")));
             }
         } catch(Exception e){
@@ -616,7 +606,9 @@ public class NewJFrame extends javax.swing.JFrame {
         currentFirstItem = 0;
         try {
             while(result.next()){
-                ItemList.addElement(result.getString("Name"));
+                String s1 = result.getString("ItemID");
+                String s2 = result.getString("Name");
+                ItemList.addElement(new StringPair(s1, s2));
                 PriceList.addElement("$" + String.valueOf(result.getDouble("Price")));
             }
         } catch(Exception e){
@@ -634,7 +626,9 @@ public class NewJFrame extends javax.swing.JFrame {
         currentFirstItem = 0;
         try {
             while(result.next()){
-                ItemList.addElement(result.getString("Name"));
+                String s1 = String.valueOf(result.getInt("ComboID"));
+                String s2 = result.getString("Name");
+                ItemList.addElement(new StringPair(s1, s2));
                 PriceList.addElement("$" + String.valueOf(result.getDouble("Price")));
             }
         } catch(Exception e){
@@ -686,6 +680,27 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         addToList(Menu1BTN.getText());
     }//GEN-LAST:event_Menu1BTNActionPerformed
+
+    private void CartListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CartListMouseClicked
+        JList list = (JList)evt.getSource();
+        if (evt.getClickCount() == 2) {
+            int index = list.locationToIndex(evt.getPoint());
+            System.out.println("index: "+index);
+            
+            StringPair item = CustomerCart.getElementAt(index);
+            
+            if (!Character.isLetter(item.ID.charAt(0))) {
+                return;
+            }
+            
+            // setVisible(false);
+            EditItem a = new EditItem(item);
+            a.setVisible(true);
+            // setVisible(true);
+            
+            CustomerCart.set(index, item);
+        }
+    }//GEN-LAST:event_CartListMouseClicked
 
     /**
      * @param args the command line arguments

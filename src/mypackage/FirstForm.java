@@ -39,6 +39,7 @@ public class FirstForm extends javax.swing.JFrame {
         customerFirstName = new javax.swing.JTextField();
         customerLastName = new javax.swing.JTextField();
         shortcutBTN = new javax.swing.JButton();
+        shortcutBTN1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +75,13 @@ public class FirstForm extends javax.swing.JFrame {
             }
         });
 
+        shortcutBTN1.setText("shortcut");
+        shortcutBTN1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shortcutBTN1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,17 +105,22 @@ public class FirstForm extends javax.swing.JFrame {
                                 .addComponent(customerLastName))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(332, 332, 332)
-                        .addComponent(login))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(shortcutBTN)))
+                        .addComponent(login)))
                 .addContainerGap(296, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(shortcutBTN)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(shortcutBTN1)
+                .addGap(60, 60, 60))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(shortcutBTN)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(shortcutBTN)
+                    .addComponent(shortcutBTN1))
                 .addGap(144, 144, 144)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -184,6 +197,12 @@ public class FirstForm extends javax.swing.JFrame {
         f.setVisible(true);
     }//GEN-LAST:event_shortcutBTNActionPerformed
 
+    private void shortcutBTN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shortcutBTN1ActionPerformed
+        dispose();
+        NewJFrame f = new NewJFrame(1);
+        f.setVisible(true);
+    }//GEN-LAST:event_shortcutBTN1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -228,6 +247,7 @@ public class FirstForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton login;
     private javax.swing.JButton shortcutBTN;
+    private javax.swing.JButton shortcutBTN1;
     // End of variables declaration//GEN-END:variables
 
 }
