@@ -12,6 +12,9 @@ import javax.swing.JOptionPane;
 import java.sql.*;
 import java.time.LocalDate;
 import java.lang.*;
+import java.lang.Math;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -26,19 +29,28 @@ public class NewJFrame extends javax.swing.JFrame {
     DefaultListModel<String> dm = new DefaultListModel(); //Krabby patty, krusty pizza
     DefaultListModel<StringPair> CustomerCart = new DefaultListModel(); //E1. E2
     DefaultListModel<StringPair> ItemList = new DefaultListModel();
-    DefaultListModel<String> PriceList = new DefaultListModel();
+    DefaultListModel<StringPair> PriceList = new DefaultListModel();
     Integer CustomerID;
     int currentFirstItem = 0;
     
     public void addToList(String name){
         dm.addElement(name);
+        String price = finalPriceLabel.getText();
+        Double currentPrice = Double.parseDouble(price.substring(1, price.length()));
         for (int i = 0; i < ItemList.size(); i++) {
             if (ItemList.getElementAt(i).name.equals(name)) {
                 CustomerCart.addElement(ItemList.getElementAt(i));
+                String itemPrice = PriceList.getElementAt(i).ID;
+                currentPrice += Double.parseDouble(itemPrice.substring(1, itemPrice.length()));
                 break;
             }
         }
         CartList.setModel(dm);
+        
+        String finalPrice = "$" + String.valueOf(Math.round(currentPrice * 100) / 100.0);
+        
+        finalPriceLabel.setText(finalPrice);
+        
     }
     public NewJFrame(Integer custID) {
         CustomerID = custID;
@@ -84,9 +96,13 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        RecommendationsListBTN = new javax.swing.JButton();
+        PageLabel = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         CartList = new javax.swing.JList<>();
+        jLabel10 = new javax.swing.JLabel();
+        finalPriceLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         ClearCart = new javax.swing.JButton();
         SubmitOrder = new javax.swing.JButton();
@@ -99,7 +115,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        BackBTN.setText("Login");
+        BackBTN.setText("Back to Login");
         BackBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BackBTNActionPerformed(evt);
@@ -227,16 +243,19 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jLabel9.setText("jLabel9");
 
+        RecommendationsListBTN.setText("Recommendations");
+        RecommendationsListBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RecommendationsListBTNActionPerformed(evt);
+            }
+        });
+
+        PageLabel.setText("Page 1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(190, Short.MAX_VALUE)
-                .addComponent(PrevPageBTN)
-                .addGap(150, 150, 150)
-                .addComponent(NextPageBTN)
-                .addGap(184, 184, 184))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,16 +285,29 @@ public class NewJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel9))
                         .addGap(23, 23, 23))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(RecommendationsListBTN)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                         .addComponent(ComboListBTN)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                         .addComponent(EntreeListBTN)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                         .addComponent(SidesListBTN)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                         .addComponent(DrinkListBTN)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                         .addComponent(DessertListBTN)
-                        .addGap(20, 20, 20))))
+                        .addContainerGap(46, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(PrevPageBTN)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(NextPageBTN)
+                .addGap(50, 50, 50))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PageLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,7 +318,8 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(EntreeListBTN)
                     .addComponent(SidesListBTN)
                     .addComponent(DrinkListBTN)
-                    .addComponent(DessertListBTN))
+                    .addComponent(DessertListBTN)
+                    .addComponent(RecommendationsListBTN))
                 .addGap(99, 99, 99)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -311,11 +344,13 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(Menu6BTN)
                     .addComponent(Menu7BTN)
                     .addComponent(Menu8BTN))
-                .addGap(97, 97, 97)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NextPageBTN)
                     .addComponent(PrevPageBTN))
-                .addGap(40, 40, 40))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PageLabel)
+                .addGap(30, 30, 30))
         );
 
         MenuTab.addTab("Menu", jPanel1);
@@ -327,6 +362,10 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(CartList);
 
+        jLabel10.setText("Final price:");
+
+        finalPriceLabel.setText("$0.00");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -334,13 +373,23 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addGap(30, 30, 30)
+                .addComponent(finalPriceLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(finalPriceLabel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel1.setText("Cart");
@@ -381,8 +430,9 @@ public class NewJFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(8, 8, 8)
                 .addComponent(BackBTN)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -447,7 +497,7 @@ public class NewJFrame extends javax.swing.JFrame {
             buttonsArray.elementAt(i).setVisible(true);
             buttonsArray.elementAt(i).setText(ItemList.elementAt(currentFirstItem+i).name);
             textFieldArray.elementAt(i).setVisible(true);
-            textFieldArray.elementAt(i).setText(PriceList.elementAt(currentFirstItem+i));
+            textFieldArray.elementAt(i).setText(PriceList.elementAt(currentFirstItem+i).ID);
         }
         for (int i = itemsOnPage; i < 8; i++) {
             buttonsArray.elementAt(i).setVisible(false);
@@ -459,6 +509,7 @@ public class NewJFrame extends javax.swing.JFrame {
         dm.clear();
         CartList.setModel(dm);
         CustomerCart.clear();
+        finalPriceLabel.setText("$0.00");
     }
     
     private void ClearCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearCartActionPerformed
@@ -512,26 +563,55 @@ public class NewJFrame extends javax.swing.JFrame {
         }
         order = order.substring(0, order.length() - 1);
         order += "}";
-        JOptionPane.showMessageDialog(null, order);
 
+        String date = LocalDate.now().toString();
+        String newDate = "";
+        int counter = 0;
+        for (String i : date.split("-")) {
+            if (counter == 1 || counter == 2) {
+                if (i.length() == 1) {
+                    newDate += "0" + i;
+                } else {
+                    newDate += i;
+                }
+            } else {
+                newDate += i;
+            }
+            if (counter != 2) {
+                newDate += "-";
+            }
+            counter++;
+        }
+        
+        
         String insert_stmt = "INSERT INTO public.\"OrderHistory\"(\"OrderID\",";
         insert_stmt += "\"CustomerID\", \"Date\", \"TotalOrder\") VALUES (";
         insert_stmt += String.valueOf(OrderID) + ", " + String.valueOf(CustomerID);
-        insert_stmt += ", \'" + LocalDate.now() + "\', \'" + order + "\')";
+        insert_stmt += ", \'" + newDate + "\', \'" + order + "\')";
         
         db.insert(insert_stmt);
 
         ClearCartActionPerformed_helper();
+        
+        dispose();
+        JOptionPane.showMessageDialog(null, "Thanks for dining at the Krusty Krab :)");
+        FirstForm a = new FirstForm();
+        a.setVisible(true);
+        
     }//GEN-LAST:event_SubmitOrderActionPerformed
 
     private void PrevPageBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrevPageBTNActionPerformed
         currentFirstItem -= 8;
+        Integer currentPage = Integer.parseInt(PageLabel.getText().substring(5,6)) - 1;
+        PageLabel.setText("Page " + String.valueOf(currentPage));
         formatButtons();
     }//GEN-LAST:event_PrevPageBTNActionPerformed
 
     private void NextPageBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextPageBTNActionPerformed
         // TODO add your handling code here:
         currentFirstItem += 8;
+        Integer currentPage = Integer.parseInt(PageLabel.getText().substring(5,6)) + 1;
+        PageLabel.setText("Page " + String.valueOf(currentPage));
         formatButtons();
     }//GEN-LAST:event_NextPageBTNActionPerformed
 
@@ -541,12 +621,13 @@ public class NewJFrame extends javax.swing.JFrame {
         ItemList.clear();
         PriceList.clear();
         currentFirstItem = 0;
+        PageLabel.setText("Page 1");
         try {
             while(result.next()){
                 String s1 = result.getString("ItemID");
                 String s2 = result.getString("Name");
                 ItemList.addElement(new StringPair(s1, s2));
-                PriceList.addElement("$" + String.valueOf(result.getDouble("Price")));
+                PriceList.addElement(new StringPair("$" + String.valueOf(result.getDouble("Price")), s2));
             }
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Query Error");
@@ -562,12 +643,13 @@ public class NewJFrame extends javax.swing.JFrame {
         ItemList.clear();
         PriceList.clear();
         currentFirstItem = 0;
+        PageLabel.setText("Page 1");
         try {
             while(result.next()){
                 String s1 = result.getString("ItemID");
                 String s2 = result.getString("Name");
                 ItemList.addElement(new StringPair(s1, s2));
-                PriceList.addElement("$" + String.valueOf(result.getDouble("Price")));
+                PriceList.addElement(new StringPair("$" + String.valueOf(result.getDouble("Price")), s2));
             }
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Query Error");
@@ -583,12 +665,13 @@ public class NewJFrame extends javax.swing.JFrame {
         ItemList.clear();
         PriceList.clear();
         currentFirstItem = 0;
+        PageLabel.setText("Page 1");
         try {
             while(result.next()){
                 String s1 = result.getString("ItemID");
                 String s2 = result.getString("Name");
                 ItemList.addElement(new StringPair(s1, s2));
-                PriceList.addElement("$" + String.valueOf(result.getDouble("Price")));
+                PriceList.addElement(new StringPair("$" + String.valueOf(result.getDouble("Price")), s2));
             }
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Query Error");
@@ -604,12 +687,13 @@ public class NewJFrame extends javax.swing.JFrame {
         ItemList.clear();
         PriceList.clear();
         currentFirstItem = 0;
+        PageLabel.setText("Page 1");
         try {
             while(result.next()){
                 String s1 = result.getString("ItemID");
                 String s2 = result.getString("Name");
                 ItemList.addElement(new StringPair(s1, s2));
-                PriceList.addElement("$" + String.valueOf(result.getDouble("Price")));
+                PriceList.addElement(new StringPair("$" + String.valueOf(result.getDouble("Price")), s2));
             }
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Query Error");
@@ -624,12 +708,13 @@ public class NewJFrame extends javax.swing.JFrame {
         ItemList.clear();
         PriceList.clear();
         currentFirstItem = 0;
+        PageLabel.setText("Page 1");
         try {
             while(result.next()){
                 String s1 = String.valueOf(result.getInt("ComboID"));
                 String s2 = result.getString("Name");
                 ItemList.addElement(new StringPair(s1, s2));
-                PriceList.addElement("$" + String.valueOf(result.getDouble("Price")));
+                PriceList.addElement(new StringPair("$" + String.valueOf(result.getDouble("Price")), s2));
             }
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Query Error");
@@ -693,15 +778,142 @@ public class NewJFrame extends javax.swing.JFrame {
                 return;
             }
             
-            // setVisible(false);
-            EditItem a = new EditItem(item);
-            a.setVisible(true);
-            // setVisible(true);
+            item.name = item.name.split(" customized")[0];
             
-            CustomerCart.set(index, item);
+            setVisible(false);
+            EditItem a = new EditItem(item, index, this);
+            a.setVisible(true);
         }
     }//GEN-LAST:event_CartListMouseClicked
 
+    ArrayList<StringPair> getEntreeOccurrences() {
+    
+        String date = LocalDate.now().minusMonths(12).toString();
+        String newDate = "";
+        int counter = 0;
+        for (String i : date.split("-")) {
+            if (counter == 1 || counter == 2) {
+                if (i.length() == 1) {
+                    newDate += "0" + i;
+                } else {
+                    newDate += i;
+                }
+            } else {
+                newDate += i;
+                counter++;
+            }
+            if (counter != 2) {
+                newDate += "-";
+            }
+        }
+
+        String query = "SELECT * FROM public.\"OrderHistory\" WHERE \"Date\" >= \'";
+        query += newDate + "\' ORDER BY \"Date\" DESC LIMIT 10000";
+
+        ResultSet result = db.query(query);
+        ArrayList<StringPair> entreeOccurrences = new ArrayList();
+
+        for (int i = 0; i < 50; i++) {
+            entreeOccurrences.add(new StringPair("E" + String.valueOf(i), "0"));
+        }
+
+        String ItemsList;
+        Integer i_int;
+        try {
+            while (result.next()) {
+                ItemsList = result.getString("TotalOrder");
+                ItemsList = ItemsList.substring(1, ItemsList.length() - 1);
+                for (String i : ItemsList.split(",")) {
+                    if (!i.substring(0,1).equals("E")) {
+                        continue;
+                    }
+                    i = i.strip().substring(1, i.length());
+                    for (int j = 0; j < i.length(); j++) {
+                        if (i.charAt(j) == ('+') || i.charAt(j) == ('-')) {
+                            i = i.substring(0, j);
+                            break;
+                        }
+                    }
+                    i_int = Integer.parseInt(i);
+                    StringPair item = entreeOccurrences.get(i_int);
+                    Integer occurrences = Integer.parseInt(item.name) + 1;
+                    entreeOccurrences.set(i_int, new StringPair(item.ID, String.valueOf(occurrences)));
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return entreeOccurrences;
+    }
+    
+    
+    private void RecommendationsListBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecommendationsListBTNActionPerformed
+        
+        ArrayList<StringPair> entreeOccurrences = getEntreeOccurrences();
+        
+        for (int i = 0; i < entreeOccurrences.size(); i++) {
+            for (int j = i; j < entreeOccurrences.size(); j++) {
+                if (Integer.parseInt(entreeOccurrences.get(i).name) < Integer.parseInt(entreeOccurrences.get(j).name)) {
+                    Collections.swap(entreeOccurrences, i, j);
+                }
+            }
+        }
+        
+        ArrayList<String> topItems = new ArrayList();
+        
+        for (int i = 0; i < 8; i++) {
+            topItems.add(entreeOccurrences.get(i).ID);
+        }
+        
+        
+        ResultSet result = db.query("SELECT * FROM public.\"MenuItems\"");
+        ItemList.clear();
+        PriceList.clear();
+        currentFirstItem = 0;
+        PageLabel.setText("Page 1");
+        try {
+            while(result.next()){
+                boolean found = false;
+                for (String i : topItems) {
+                    if (i.equals(result.getString("ItemID"))) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    continue;
+                }
+                String s1 = result.getString("ItemID");
+                String s2 = result.getString("Name");
+                ItemList.addElement(new StringPair(s1, s2));
+                PriceList.addElement(new StringPair("$" + String.valueOf(result.getDouble("Price")), s2));
+            }
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+        formatButtons();
+    }//GEN-LAST:event_RecommendationsListBTNActionPerformed
+
+    public void done_editing_item(String item, Integer index) {
+        setVisible(true);
+        
+        if (item == null) {
+            return;
+        } else {
+            StringPair oldStringPair = CustomerCart.getElementAt(index);
+            StringPair newStringPair = new StringPair(item, oldStringPair.name + " customized");
+            CustomerCart.set(index, newStringPair);
+        }
+        
+        dm.clear();
+        for (int i = 0; i < CustomerCart.size(); i++) {
+            dm.addElement(CustomerCart.getElementAt(i).name);
+        }
+        
+        CartList.setModel(dm);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -756,10 +968,14 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton Menu8BTN;
     private javax.swing.JTabbedPane MenuTab;
     private javax.swing.JButton NextPageBTN;
+    private javax.swing.JLabel PageLabel;
     private javax.swing.JButton PrevPageBTN;
+    private javax.swing.JButton RecommendationsListBTN;
     private javax.swing.JButton SidesListBTN;
     private javax.swing.JButton SubmitOrder;
+    private javax.swing.JLabel finalPriceLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

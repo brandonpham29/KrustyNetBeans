@@ -8,7 +8,9 @@ import javax.swing.JOptionPane;
 import java.sql.*;
 import net.proteanit.sql.DbUtils;
 import javax.swing.DefaultListModel;
+import javax.swing.DefaultComboBoxModel;
 import java.util.*;
+import java.time.*;
 
 /**
  *
@@ -20,16 +22,24 @@ public class OrderHistory extends javax.swing.JFrame {
      * Creates new form OrderHistory
      */
     DBSearch db = new DBSearch();
-    
+    DefaultComboBoxModel<String> MenuItems = new DefaultComboBoxModel();
     
     public OrderHistory() {
         initComponents();
         DisplayTable();
+        ResultSet result = db.query("SELECT * FROM public.\"MenuItems\"");
+        try {
+            while (result.next()) {
+                MenuItems.addElement(result.getString("Name"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        MenuItemSelect.setModel(MenuItems);
     }
     public void DisplayTable(){
         try{
             ResultSet result = db.query("SELECT * FROM public.\"OrderHistory\" ORDER BY \"OrderID\" DESC LIMIT 100");
-            result.next();
             OrderTable.setModel(DbUtils.resultSetToTableModel(result));
             OrderTable.setAutoCreateRowSorter(true);
         } catch(Exception e){
@@ -67,6 +77,8 @@ public class OrderHistory extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         DeleteItemBTN = new javax.swing.JButton();
+        clearBTN = new javax.swing.JButton();
+        IngredientsListBTN = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         ViewLeastOrderedItemsBTN = new javax.swing.JButton();
         ViewMostOrderedItemsBTN = new javax.swing.JButton();
@@ -76,6 +88,12 @@ public class OrderHistory extends javax.swing.JFrame {
         leastOrderedItemLabel2 = new javax.swing.JLabel();
         mostOrderedItemLabel1 = new javax.swing.JLabel();
         mostOrderedItemLabel2 = new javax.swing.JLabel();
+        leastOrderedItemLabel3 = new javax.swing.JLabel();
+        leastOrderedItemLabel4 = new javax.swing.JLabel();
+        leastOrderedItemLabel5 = new javax.swing.JLabel();
+        mostOrderedItemLabel3 = new javax.swing.JLabel();
+        mostOrderedItemLabel4 = new javax.swing.JLabel();
+        mostOrderedItemLabel5 = new javax.swing.JLabel();
         DateTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         CustomerIDTextField = new javax.swing.JTextField();
@@ -83,13 +101,13 @@ public class OrderHistory extends javax.swing.JFrame {
         OrderIDTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         SortOrderHistoryBTN = new javax.swing.JButton();
-        ItemNameTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        MenuItemSelect = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Login");
+        jButton1.setText("Back to Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -142,7 +160,7 @@ public class OrderHistory extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("ItemID(dont edit)");
+        jLabel5.setText("Item ID");
 
         jLabel6.setText("Name");
 
@@ -161,43 +179,60 @@ public class OrderHistory extends javax.swing.JFrame {
             }
         });
 
+        clearBTN.setText("Clear fields");
+        clearBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearBTNActionPerformed(evt);
+            }
+        });
+
+        IngredientsListBTN.setText("Ingredients List");
+        IngredientsListBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IngredientsListBTNActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(ItemIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(5, 5, 5)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(5, 5, 5)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(PriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addGap(5, 5, 5)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(BaseIngredientsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addGap(5, 5, 5)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(DefaultIngredientsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
-                        .addGap(5, 5, 5)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(PermissibleIngredientsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)))
-                    .addComponent(Update_Add_BTN, javax.swing.GroupLayout.Alignment.CENTER))
-                .addContainerGap(30, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(131, 131, 131)
                 .addComponent(DeleteItemBTN)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(clearBTN)
+                    .addComponent(Update_Add_BTN))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(IngredientsListBTN)
+                .addGap(131, 131, 131))
+            .addGroup(javax.swing.GroupLayout.Alignment.CENTER, jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(ItemIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(PriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(BaseIngredientsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(DefaultIngredientsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(PermissibleIngredientsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addGap(10, 10, 10))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,11 +253,14 @@ public class OrderHistory extends javax.swing.JFrame {
                     .addComponent(BaseIngredientsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DefaultIngredientsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PermissibleIngredientsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
-                .addComponent(Update_Add_BTN)
-                .addGap(26, 26, 26)
-                .addComponent(DeleteItemBTN)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+                .addComponent(clearBTN)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(IngredientsListBTN)
+                    .addComponent(DeleteItemBTN)
+                    .addComponent(Update_Add_BTN))
+                .addGap(60, 60, 60))
         );
 
         ManagerPane.addTab("Edit Menu Items", jPanel1);
@@ -253,24 +291,42 @@ public class OrderHistory extends javax.swing.JFrame {
 
         mostOrderedItemLabel2.setText("        ");
 
+        leastOrderedItemLabel3.setText("       ");
+
+        leastOrderedItemLabel4.setText("       ");
+
+        leastOrderedItemLabel5.setText("       ");
+
+        mostOrderedItemLabel3.setText("        ");
+
+        mostOrderedItemLabel4.setText("        ");
+
+        mostOrderedItemLabel5.setText("        ");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(ViewLeastOrderedItemsBTN)
                     .addComponent(leastOrderedItemLabel)
                     .addComponent(leastOrderedItemLabel1)
-                    .addComponent(leastOrderedItemLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 454, Short.MAX_VALUE)
+                    .addComponent(leastOrderedItemLabel2)
+                    .addComponent(leastOrderedItemLabel3)
+                    .addComponent(leastOrderedItemLabel4)
+                    .addComponent(leastOrderedItemLabel5)
+                    .addComponent(ViewLeastOrderedItemsBTN))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(ViewMostOrderedItemsBTN)
-                    .addComponent(mostOrderedItemLabel)
+                    .addComponent(mostOrderedItemLabel3)
+                    .addComponent(mostOrderedItemLabel2)
                     .addComponent(mostOrderedItemLabel1)
-                    .addComponent(mostOrderedItemLabel2))
-                .addGap(20, 20, 20))
+                    .addComponent(mostOrderedItemLabel)
+                    .addComponent(mostOrderedItemLabel4)
+                    .addComponent(mostOrderedItemLabel5)
+                    .addComponent(ViewMostOrderedItemsBTN))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,7 +347,21 @@ public class OrderHistory extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(leastOrderedItemLabel2)
                     .addComponent(mostOrderedItemLabel2))
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(mostOrderedItemLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mostOrderedItemLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mostOrderedItemLabel5))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(leastOrderedItemLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(leastOrderedItemLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(leastOrderedItemLabel5)))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         ManagerPane.addTab("Menu Recommendations", jPanel2);
@@ -336,11 +406,12 @@ public class OrderHistory extends javax.swing.JFrame {
             }
         });
 
+        MenuItemSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ManagerPane)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1)
@@ -360,35 +431,35 @@ public class OrderHistory extends javax.swing.JFrame {
                 .addComponent(SortOrderHistoryBTN)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(ItemNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MenuItemSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(jButton4))
-                .addGap(28, 28, 28))
+                .addGap(34, 34, 34))
+            .addComponent(ManagerPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(SortOrderHistoryBTN)
-                    .addComponent(OrderIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CustomerIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ItemNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(SortOrderHistoryBTN)
+                            .addComponent(OrderIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CustomerIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(MenuItemSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton1))
+                .addGap(10, 10, 10)
                 .addComponent(jButton4)
-                .addGap(2, 2, 2)
-                .addComponent(ManagerPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jButton1)
-                .addGap(440, 440, 440))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ManagerPane, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE))
         );
 
         pack();
@@ -468,12 +539,8 @@ public class OrderHistory extends javax.swing.JFrame {
         //sfhhgkdfhgdhgdjkghdfgyidygridfgjkdfhg
     }//GEN-LAST:event_OrderTableFocusGained
 
-    private void ItemIDTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemIDTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ItemIDTextFieldActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        String ItemName = ItemNameTextField.getText();
+        String ItemName = String.valueOf(MenuItemSelect.getSelectedItem());
         
         ResultSet menuresult = db.query("SELECT * FROM public.\"MenuItems\"");
         
@@ -498,7 +565,6 @@ public class OrderHistory extends javax.swing.JFrame {
         }
         
         if (!isInMenu) {
-            ItemNameTextField.setText("");
             ItemIDTextField.setText("");
             NameTextField.setText("");
             PriceTextField.setText("");
@@ -535,27 +601,229 @@ public class OrderHistory extends javax.swing.JFrame {
             return;
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+    
+ArrayList<Integer> getEntreeOccurrences() {
+    
+    String date = LocalDate.now().minusMonths(12).toString();
+    String newDate = "";
+    int counter = 0;
+    for (String i : date.split("-")) {
+        if (counter == 1 || counter == 2) {
+            if (i.length() == 1) {
+                newDate += "0" + i;
+            } else {
+                newDate += i;
+            }
+        } else {
+            newDate += i;
+            counter++;
+        }
+        if (counter != 2) {
+            newDate += "-";
+        }
+    }
+    
+    String query = "SELECT * FROM public.\"OrderHistory\" WHERE \"Date\" >= \'";
+    query += newDate + "\' ORDER BY \"Date\" DESC LIMIT 10000";
+    
+    ResultSet result = db.query(query);
+    ArrayList<Integer> entreeOccurrences = new ArrayList();
 
-    private void Update_Add_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Update_Add_BTNActionPerformed
-        
+    for (int i = 0; i < 50; i++) {
+        entreeOccurrences.add(0);
+    }
+
+    String ItemsList;
+    Integer i_int;
+    try {
+        while (result.next()) {
+            ItemsList = result.getString("TotalOrder");
+            ItemsList = ItemsList.substring(1, ItemsList.length() - 1);
+            for (String i : ItemsList.split(",")) {
+                if (!i.substring(0,1).equals("E")) {
+                    continue;
+                }
+                i = i.strip().substring(1, i.length());
+                for (int j = 0; j < i.length(); j++) {
+                    if (i.charAt(j) == ('+') || i.charAt(j) == ('-')) {
+                        i = i.substring(0, j);
+                        break;
+                    }
+                }
+                i_int = Integer.parseInt(i);
+                entreeOccurrences.set(i_int, entreeOccurrences.get(i_int) + 1);
+            }
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e.getMessage());
+    }
+    return entreeOccurrences;
+}
+    
+    private void ViewLeastOrderedItemsBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewLeastOrderedItemsBTNActionPerformed
+        ArrayList<Integer> entreeOccurrences = getEntreeOccurrences();
+        int minimumIndex = -1;
+        int secondMinimumIndex = -1;
+        int minimumValue = 100000000;
+        int secondMinimumValue = 100000001;
+        for (int i = 0; i < entreeOccurrences.size(); i++) {
+            if (entreeOccurrences.get(i) <= minimumValue && entreeOccurrences.get(i) > 0) {
+                secondMinimumValue = minimumValue;
+                secondMinimumIndex = minimumIndex;
+                minimumValue = entreeOccurrences.get(i);
+                minimumIndex = i;
+            } else if (entreeOccurrences.get(i) <= secondMinimumValue && entreeOccurrences.get(i) > 0) {
+                secondMinimumValue = entreeOccurrences.get(i);
+                secondMinimumIndex = i;
+            }
+        }
+        if (minimumIndex > 0) {
+            String ItemID = "E" + String.valueOf(minimumIndex);
+            String ItemName = "";
+            ResultSet result = db.query("SELECT * FROM public.\"MenuItems\" WHERE \"ItemID\" = \'" + ItemID + "\'");
+            try {
+                result.next();
+                ItemName = result.getString("Name");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+            leastOrderedItemLabel.setText("The least ordered entree (in the most recent 10000 orders) is:");
+            leastOrderedItemLabel1.setText(ItemName);
+            leastOrderedItemLabel2.setText("\nWe recommend lowering the price of this item.");
+        }
+        if (secondMinimumIndex > 0) {
+            String ItemID = "E" + String.valueOf(secondMinimumIndex);
+            String ItemName = "";
+            ResultSet result = db.query("SELECT * FROM public.\"MenuItems\" WHERE \"ItemID\" = \'" + ItemID + "\'");
+            try {
+                result.next();
+                ItemName = result.getString("Name");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+            leastOrderedItemLabel3.setText("The second least ordered entree (in the most recent 10000 orders) is:");
+            leastOrderedItemLabel4.setText(ItemName);
+            leastOrderedItemLabel5.setText("\nWe recommend decreasing the price of this item as well.");
+        }
+    }//GEN-LAST:event_ViewLeastOrderedItemsBTNActionPerformed
+
+    private void ViewMostOrderedItemsBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewMostOrderedItemsBTNActionPerformed
+        ArrayList<Integer> entreeOccurrences = getEntreeOccurrences();
+        int maximumIndex = -1;
+        int maximumValue = -1;
+        int secondMaximumIndex = -1;
+        int secondMaximumValue = -1;
+        for (int i = 0; i < entreeOccurrences.size(); i++) {
+            if (entreeOccurrences.get(i) >= maximumValue && entreeOccurrences.get(i) > 0) {
+                secondMaximumValue = maximumValue;
+                secondMaximumIndex = maximumIndex;
+                maximumValue = entreeOccurrences.get(i);
+                maximumIndex = i;
+            } else if (entreeOccurrences.get(i) >= secondMaximumValue && entreeOccurrences.get(i) > 0) {
+                secondMaximumValue = entreeOccurrences.get(i);
+                secondMaximumIndex = i;
+            }
+        }
+        if (maximumIndex > 0) {
+            String ItemID = "E" + String.valueOf(maximumIndex);
+            String ItemName = "";
+            ResultSet result = db.query("SELECT * FROM public.\"MenuItems\" WHERE \"ItemID\" = \'" + ItemID + "\'");
+            try {
+                result.next();
+                ItemName = result.getString("Name");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+            mostOrderedItemLabel.setText("The most ordered entree (in the most recent 10000 orders) is:");
+            mostOrderedItemLabel1.setText(ItemName);
+            mostOrderedItemLabel2.setText("\nWe recommend increasing the price of this item.");
+        }
+        if (secondMaximumIndex > 0) {
+            String ItemID = "E" + String.valueOf(secondMaximumIndex);
+            String ItemName = "";
+            ResultSet result = db.query("SELECT * FROM public.\"MenuItems\" WHERE \"ItemID\" = \'" + ItemID + "\'");
+            try {
+                result.next();
+                ItemName = result.getString("Name");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+            mostOrderedItemLabel3.setText("The second most ordered entree (in the most recent 10000 orders) is:");
+            mostOrderedItemLabel4.setText(ItemName);
+            mostOrderedItemLabel5.setText("\nWe recommend increasing the price of this item as well.");
+        }
+    }//GEN-LAST:event_ViewMostOrderedItemsBTNActionPerformed
+
+    private void IngredientsListBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngredientsListBTNActionPerformed
+        IngredientsList ingredientslist = new IngredientsList();
+        ingredientslist.setVisible(true);
+    }//GEN-LAST:event_IngredientsListBTNActionPerformed
+
+    private void clearBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBTNActionPerformed
+        ItemIDTextField.setText("");
+        NameTextField.setText("");
+        PriceTextField.setText("");
+        BaseIngredientsTextField.setText("");
+        DefaultIngredientsTextField.setText("");
+        PermissibleIngredientsTextField.setText("");
+    }//GEN-LAST:event_clearBTNActionPerformed
+
+    private void DeleteItemBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteItemBTNActionPerformed
+        String ItemID = ItemIDTextField.getText();
+
         ResultSet menuresult = db.query("SELECT * FROM public.\"MenuItems\"");
         DefaultListModel<String> menuIDArray = new DefaultListModel();
         try {
             while (menuresult.next()) {
                 menuIDArray.addElement(menuresult.getString("ItemID"));
-            } 
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        
+
+        boolean isInMenu = false;
+        for (int j = 0; j < menuIDArray.size(); j++) {
+            if (menuIDArray.getElementAt(j).equals(ItemID)) {
+                isInMenu = true;
+                break;
+            }
+        }
+
+        if (!isInMenu) {
+            JOptionPane.showMessageDialog(null, "Item is not in menu");
+        } else {
+            String delete_stmt = "DELETE FROM public.\"MenuItems\" WHERE \"ItemID\" = \'" + ItemID + "\'";
+            db.delete(delete_stmt);
+            JOptionPane.showMessageDialog(null, "Item deleted from Database");
+            ItemIDTextField.setText("");
+            NameTextField.setText("");
+            PriceTextField.setText("");
+            BaseIngredientsTextField.setText("");
+            DefaultIngredientsTextField.setText("");
+            PermissibleIngredientsTextField.setText("");
+        }
+
+    }//GEN-LAST:event_DeleteItemBTNActionPerformed
+
+    private void Update_Add_BTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Update_Add_BTNActionPerformed
+
+        ResultSet menuresult = db.query("SELECT * FROM public.\"MenuItems\"");
+        DefaultListModel<String> menuIDArray = new DefaultListModel();
+        try {
+            while (menuresult.next()) {
+                menuIDArray.addElement(menuresult.getString("ItemID"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
         String ItemID = ItemIDTextField.getText();
         String Name = NameTextField.getText();
         String Price = PriceTextField.getText();
         String BaseIngredients = BaseIngredientsTextField.getText();
         String DefaultIngredients = DefaultIngredientsTextField.getText();
         String PermissibleIngredients = PermissibleIngredientsTextField.getText();
-        
-        
+
         boolean exitCondition = ItemID.isEmpty() || Name.isEmpty() || Price.isEmpty();
         exitCondition = exitCondition || BaseIngredients.isEmpty();
         exitCondition = exitCondition || DefaultIngredients.isEmpty();
@@ -564,7 +832,7 @@ public class OrderHistory extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please fill in all fields");
             return;
         }
-        
+
         boolean isInMenu = false;
         for (int j = 0; j < menuIDArray.size(); j++) {
             if (menuIDArray.getElementAt(j).equals(ItemID)) {
@@ -572,7 +840,7 @@ public class OrderHistory extends javax.swing.JFrame {
                 break;
             }
         }
-        
+
         boolean success = false;
         if (isInMenu) {
             String query = "UPDATE public.\"MenuItems\" ";
@@ -592,10 +860,8 @@ public class OrderHistory extends javax.swing.JFrame {
             insert_stmt += PermissibleIngredients + "\')";
             success = db.insert(insert_stmt);
         }
-        
+
         if (success) {
-            JOptionPane.showMessageDialog(null, "Success");
-            ItemNameTextField.setText("");
             ItemIDTextField.setText("");
             NameTextField.setText("");
             PriceTextField.setText("");
@@ -608,132 +874,17 @@ public class OrderHistory extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Update_Add_BTNActionPerformed
 
+    private void PermissibleIngredientsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PermissibleIngredientsTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PermissibleIngredientsTextFieldActionPerformed
+
     private void NameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NameTextFieldActionPerformed
 
-    private void PermissibleIngredientsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PermissibleIngredientsTextFieldActionPerformed
+    private void ItemIDTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemIDTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_PermissibleIngredientsTextFieldActionPerformed
-    
-    private void DeleteItemBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteItemBTNActionPerformed
-        String ItemID = ItemIDTextField.getText();
-        
-        ResultSet menuresult = db.query("SELECT * FROM public.\"MenuItems\"");
-        DefaultListModel<String> menuIDArray = new DefaultListModel();
-        try {
-            while (menuresult.next()) {
-                menuIDArray.addElement(menuresult.getString("ItemID"));
-            } 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-        
-        boolean isInMenu = false;
-        for (int j = 0; j < menuIDArray.size(); j++) {
-            if (menuIDArray.getElementAt(j).equals(ItemID)) {
-                isInMenu = true;
-                break;
-            }
-        }
-        
-        if (!isInMenu) {
-            JOptionPane.showMessageDialog(null, "Item is not in menu");
-        } else {
-            String delete_stmt = "DELETE FROM public.\"MenuItems\" WHERE \"ItemID\" = \'" + ItemID + "\'";
-            db.delete(delete_stmt);
-            JOptionPane.showMessageDialog(null, "Item deleted from Database");
-            ItemNameTextField.setText("");
-            ItemIDTextField.setText("");
-            NameTextField.setText("");
-            PriceTextField.setText("");
-            BaseIngredientsTextField.setText("");
-            DefaultIngredientsTextField.setText("");
-            PermissibleIngredientsTextField.setText("");
-        }
-        
-    }//GEN-LAST:event_DeleteItemBTNActionPerformed
-
-ArrayList<Integer> getEntreeOccurrences() {
-    ResultSet result = db.query("SELECT * FROM public.\"OrderHistory\" ORDER BY \"OrderID\" DESC LIMIT 10000");
-    ArrayList<Integer> entreeOccurrences = new ArrayList();
-
-    for (int i = 0; i < 50; i++) {
-        entreeOccurrences.add(0);
-    }
-
-    String ItemsList;
-    Integer i_int;
-    try {
-        while (result.next()) {
-            ItemsList = result.getString("TotalOrder");
-            ItemsList = ItemsList.substring(1, ItemsList.length() - 1);
-            for (String i : ItemsList.split(",")) {
-                if (!i.substring(0,1).equals("E")) {
-                    continue;
-                }
-                i = i.strip().substring(1, i.length());
-                i_int = Integer.parseInt(i);
-                entreeOccurrences.set(i_int, entreeOccurrences.get(i_int) + 1);
-            }
-        }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, e.getMessage());
-    }
-    return entreeOccurrences;
-}
-    
-    private void ViewLeastOrderedItemsBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewLeastOrderedItemsBTNActionPerformed
-        ArrayList<Integer> entreeOccurrences = getEntreeOccurrences();
-        int minimumIndex = -1;
-        int minimumValue = 100000000;
-        for (int i = 0; i < entreeOccurrences.size(); i++) {
-            if (entreeOccurrences.get(i) < minimumValue && entreeOccurrences.get(i) > 0) {
-                minimumValue = entreeOccurrences.get(i);
-                minimumIndex = i;
-            }
-        }
-        if (minimumIndex > 0) {
-            String ItemID = "E" + String.valueOf(minimumIndex);
-            String ItemName = "";
-            ResultSet result = db.query("SELECT * FROM public.\"MenuItems\" WHERE \"ItemID\" = \'" + ItemID + "\'");
-            try {
-                result.next();
-                ItemName = result.getString("Name");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
-            }
-            leastOrderedItemLabel.setText("The least ordered entree (in the most recent 10000 orders) is:");
-            leastOrderedItemLabel1.setText(ItemName);
-            leastOrderedItemLabel2.setText("\nWe recommend lowering the price of this item.");
-        }
-    }//GEN-LAST:event_ViewLeastOrderedItemsBTNActionPerformed
-
-    private void ViewMostOrderedItemsBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewMostOrderedItemsBTNActionPerformed
-        ArrayList<Integer> entreeOccurrences = getEntreeOccurrences();
-        int maximumIndex = -1;
-        int maximumValue = -1;
-        for (int i = 0; i < entreeOccurrences.size(); i++) {
-            if (entreeOccurrences.get(i) > maximumValue && entreeOccurrences.get(i) > 0) {
-                maximumValue = entreeOccurrences.get(i);
-                maximumIndex = i;
-            }
-        }
-        if (maximumIndex > 0) {
-            String ItemID = "E" + String.valueOf(maximumIndex);
-            String ItemName = "";
-            ResultSet result = db.query("SELECT * FROM public.\"MenuItems\" WHERE \"ItemID\" = \'" + ItemID + "\'");
-            try {
-                result.next();
-                ItemName = result.getString("Name");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
-            }
-            mostOrderedItemLabel.setText("The most ordered entree (in the most recent 10000 orders) is:");
-            mostOrderedItemLabel1.setText(ItemName);
-            mostOrderedItemLabel2.setText("\nWe recommend increasing the price of this item.");
-        }
-    }//GEN-LAST:event_ViewMostOrderedItemsBTNActionPerformed
+    }//GEN-LAST:event_ItemIDTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -776,9 +927,10 @@ ArrayList<Integer> getEntreeOccurrences() {
     private javax.swing.JTextField DateTextField;
     private javax.swing.JTextField DefaultIngredientsTextField;
     private javax.swing.JButton DeleteItemBTN;
+    private javax.swing.JButton IngredientsListBTN;
     private javax.swing.JTextField ItemIDTextField;
-    private javax.swing.JTextField ItemNameTextField;
     private javax.swing.JTabbedPane ManagerPane;
+    private javax.swing.JComboBox<String> MenuItemSelect;
     private javax.swing.JTextField NameTextField;
     private javax.swing.JTextField OrderIDTextField;
     private javax.swing.JTable OrderTable;
@@ -788,6 +940,7 @@ ArrayList<Integer> getEntreeOccurrences() {
     private javax.swing.JButton Update_Add_BTN;
     private javax.swing.JButton ViewLeastOrderedItemsBTN;
     private javax.swing.JButton ViewMostOrderedItemsBTN;
+    private javax.swing.JButton clearBTN;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -806,8 +959,14 @@ ArrayList<Integer> getEntreeOccurrences() {
     private javax.swing.JLabel leastOrderedItemLabel;
     private javax.swing.JLabel leastOrderedItemLabel1;
     private javax.swing.JLabel leastOrderedItemLabel2;
+    private javax.swing.JLabel leastOrderedItemLabel3;
+    private javax.swing.JLabel leastOrderedItemLabel4;
+    private javax.swing.JLabel leastOrderedItemLabel5;
     private javax.swing.JLabel mostOrderedItemLabel;
     private javax.swing.JLabel mostOrderedItemLabel1;
     private javax.swing.JLabel mostOrderedItemLabel2;
+    private javax.swing.JLabel mostOrderedItemLabel3;
+    private javax.swing.JLabel mostOrderedItemLabel4;
+    private javax.swing.JLabel mostOrderedItemLabel5;
     // End of variables declaration//GEN-END:variables
 }

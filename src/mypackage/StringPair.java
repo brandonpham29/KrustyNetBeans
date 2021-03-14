@@ -13,9 +13,9 @@ public class StringPair {
     public String ID;
     public String name;
     
-    public StringPair(String s1, String s2) {
-        ID = s1;
-        name = s2;
+    public StringPair(String tempID, String tempName) {
+        ID = tempID;
+        name = tempName;
     }
     
 }
